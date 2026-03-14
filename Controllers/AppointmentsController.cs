@@ -19,14 +19,20 @@ public class AppointmentsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var appointments = await _context.Appointments.ToListAsync();
+        var appointments = await _context.Appointments
+            .Include(a => a.Customer)
+            .Include(a => a.Therapy)
+            .ToListAsync();
         return Ok(appointments);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var appointment = await _context.Appointments.FindAsync(id);
+        var appointment = await _context.Appointments
+            .Include(a => a.Customer)
+            .Include(a => a.Therapy)
+            .FirstOrDefaultAsync(a => a.Id == id);
         if (appointment is null) return NotFound();
         return Ok(appointment);
     }
@@ -45,9 +51,9 @@ public class AppointmentsController : ControllerBase
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment is null) return NotFound();
 
+        appointment.CustomerId = updated.CustomerId;
+        appointment.TherapyId = updated.TherapyId;
         appointment.Timestamp = updated.Timestamp;
-        appointment.Duration = updated.Duration;
-        appointment.TherapyName = updated.TherapyName;
         appointment.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

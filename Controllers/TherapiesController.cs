@@ -47,7 +47,9 @@ public class TherapiesController : ControllerBase
 
         therapy.Name = updated.Name;
         therapy.Description = updated.Description;
+        therapy.Duration = updated.Duration;
         therapy.Price = updated.Price;
+        therapy.ValidUntil = updated.ValidUntil;
         therapy.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

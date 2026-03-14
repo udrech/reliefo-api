@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace reliefo_api.Models;
 
+[Table("therapies")]
 public class Therapy
 {
     [Column("id")]
@@ -10,13 +11,19 @@ public class Therapy
 
     [Column("name")]
     [StringLength(100)]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; } = null!;
 
     [Column("description")]
-    public string? Description { get; set; }
+    public string? Description { get; set; } = null!;
+
+    [Column("duration")]
+    public int? Duration { get; set; }
 
     [Column("price")]
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; } = null!;
+
+    [Column("valid_until")]
+    public DateTime ValidUntil { get; set; } = DateTime.UtcNow.AddYears(10);
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

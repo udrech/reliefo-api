@@ -26,6 +26,12 @@ dotnet ef migrations add <MigrationName>
 dotnet ef database update
 ```
 
+## API starten zum Testem
+
+```bash
+dotnet watch
+```
+
 ## Nächste Schritte
 * Tabellen erstellen lassen und prüfen
 * Refential Constraints hinzufügen

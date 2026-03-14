@@ -19,14 +19,18 @@ public class MedicalHistoriesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var records = await _context.MedicalHistories.ToListAsync();
+        var records = await _context.MedicalHistories
+            .Include(m => m.Customer)
+            .ToListAsync();
         return Ok(records);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var record = await _context.MedicalHistories.FindAsync(id);
+        var record = await _context.MedicalHistories
+            .Include(m => m.Customer)
+            .FirstOrDefaultAsync(m => m.Id == id);
         if (record is null) return NotFound();
         return Ok(record);
     }
@@ -45,6 +49,7 @@ public class MedicalHistoriesController : ControllerBase
         var record = await _context.MedicalHistories.FindAsync(id);
         if (record is null) return NotFound();
 
+        record.CustomerId = updated.CustomerId;
         record.Timestamp = updated.Timestamp;
         record.Type = updated.Type;
         record.Note = updated.Note;

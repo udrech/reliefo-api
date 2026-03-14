@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace reliefo_api.Models;
 
-[Table("medical_histories")]
-public class MedicalHistory
+[Table("receipts")]
+public class Receipt
 {
     [Column("id")]
     public int Id { get; set; }
@@ -15,15 +15,15 @@ public class MedicalHistory
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
-    [Column("timstamp")]
+    [Column("timestamp")]
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 
-    [Column("type")]
-    [StringLength(100)]
-    public string? Type { get; set; } = null!;
+    [Column("file")]
+    [StringLength(255)]
+    public string File { get; set; } = null!;
 
-    [Column("note")]
-    public string Note { get; set; } = null!;
+    [Column("data")]
+    public string Data { get; set; } = null!;
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
