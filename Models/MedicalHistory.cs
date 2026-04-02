@@ -7,6 +7,7 @@ namespace reliefo_api.Models;
 public class MedicalHistory
 {
     [Column("id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [Column("customers_id")]
@@ -15,8 +16,8 @@ public class MedicalHistory
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
-    [Column("timstamp")]
-    public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+    [Column("history_timestamp")]
+    public DateTime HistoryTimestamp { get; set; } = DateTime.UtcNow;
 
     [Column("type")]
     [StringLength(100)]

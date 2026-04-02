@@ -50,7 +50,7 @@ public class MedicalHistoriesController : ControllerBase
         if (record is null) return NotFound();
 
         record.CustomerId = updated.CustomerId;
-        record.Timestamp = updated.Timestamp;
+        record.HistoryTimestamp = updated.HistoryTimestamp;
         record.Type = updated.Type;
         record.Note = updated.Note;
         record.UpdatedAt = DateTime.UtcNow;

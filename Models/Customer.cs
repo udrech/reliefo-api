@@ -7,6 +7,7 @@ namespace reliefo_api.Models;
 public class Customer
 {
     [Column("id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [Column("lastname")]

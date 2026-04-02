@@ -7,6 +7,7 @@ namespace reliefo_api.Models;
 public class Appointment
 {
     [Column("id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [Column("customers_id")]
@@ -21,8 +22,8 @@ public class Appointment
     [ForeignKey("TherapyId")]
     public Therapy? Therapy { get; set; }
 
-    [Column("timestamp")]
-    public DateTime Timestamp { get; set; }
+    [Column("appointment_timestamp")]
+    public DateTime AppointmentTimestamp { get; set; }
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

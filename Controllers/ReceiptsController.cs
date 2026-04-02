@@ -50,7 +50,7 @@ public class ReceiptsController : ControllerBase
         if (receipt is null) return NotFound();
 
         receipt.CustomerId = updated.CustomerId;
-        receipt.Timestamp = updated.Timestamp;
+        receipt.ReceiptTimestamp = updated.ReceiptTimestamp;
         receipt.File = updated.File;
         receipt.Data = updated.Data;
         receipt.UpdatedAt = DateTime.UtcNow;

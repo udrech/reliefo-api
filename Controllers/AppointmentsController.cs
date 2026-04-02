@@ -53,7 +53,7 @@ public class AppointmentsController : ControllerBase
 
         appointment.CustomerId = updated.CustomerId;
         appointment.TherapyId = updated.TherapyId;
-        appointment.Timestamp = updated.Timestamp;
+        appointment.AppointmentTimestamp = updated.AppointmentTimestamp;
         appointment.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

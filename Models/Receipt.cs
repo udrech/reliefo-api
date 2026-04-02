@@ -7,6 +7,7 @@ namespace reliefo_api.Models;
 public class Receipt
 {
     [Column("id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [Column("customers_id")]
@@ -15,8 +16,8 @@ public class Receipt
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
-    [Column("timestamp")]
-    public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+    [Column("receipt_timestamp")]
+    public DateTime ReceiptTimestamp { get; set; } = DateTime.UtcNow;
 
     [Column("file")]
     [StringLength(255)]
