@@ -22,6 +22,7 @@ public class AppointmentsController : ControllerBase
         var appointments = await _context.Appointments
             .Include(a => a.Customer)
             .Include(a => a.Therapy)
+            .OrderByDescending(a => a.AppointmentTimestamp)
             .ToListAsync();
         return Ok(appointments);
     }
