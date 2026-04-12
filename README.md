@@ -2,6 +2,10 @@
 
 Reliefo Therapy App API
 
+## ToDo
+
+* Feld birthdate in Customer hinzufügen
+
 ## DB erstellen
 
 ```bash
