@@ -27,6 +27,17 @@ public class AppointmentsController : ControllerBase
         return Ok(appointments);
     }
 
+    [HttpGet("customer/{customerId}")]
+    public async Task<IActionResult> GetByCustomerId(int customerId)
+    {
+        var appointments = await _context.Appointments
+            .Where(a => a.CustomerId == customerId)
+            .Include(a => a.Therapy)
+            .OrderByDescending(a => a.AppointmentTimestamp)
+            .ToListAsync();
+        return Ok(appointments);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -61,17 +72,6 @@ public class AppointmentsController : ControllerBase
 
         await _context.SaveChangesAsync();
         return Ok(appointment);
-    }
-
-    [HttpGet("customer/{customerId}")]
-    public async Task<IActionResult> GetByCustomerId(int customerId)
-    {
-        var appointments = await _context.Appointments
-            .Where(a => a.CustomerId == customerId)
-            .Include(a => a.Therapy)
-            .OrderByDescending(a => a.AppointmentTimestamp)
-            .ToListAsync();
-        return Ok(appointments);
     }
 
     [HttpDelete("{id}")]
