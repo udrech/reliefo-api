@@ -16,9 +16,6 @@ public class Bill
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
-    [Column("bill_timestamp")]
-    public DateTime BillTimestamp { get; set; } = DateTime.UtcNow;
-
     [Column("file")]
     [StringLength(255)]
     public string File { get; set; } = null!;

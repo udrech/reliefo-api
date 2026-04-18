@@ -50,7 +50,6 @@ public class BillsController : ControllerBase
         if (bill is null) return NotFound();
 
         bill.CustomerId = updated.CustomerId;
-        bill.BillTimestamp = updated.BillTimestamp;
         bill.File = updated.File;
         bill.Data = updated.Data;
         bill.UpdatedAt = DateTime.UtcNow;
