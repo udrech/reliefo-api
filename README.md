@@ -27,12 +27,26 @@ GRANT ALL ON SCHEMA public TO reliefo;
 ## Migrationen erstellen
 
 ```bash
+rm -rf Migrations
 dotnet ef migrations add InitialCreate
+
 dotnet ef migrations add <MigrationName>
 dotnet ef database update
 ```
 
-## API starten zum Testem
+## DB zurücksetzen
+
+```bash
+sudo -u postgres psql -d reliefo -f /mnt/c/Users/ursdr/workspace/dotnet/reliefo-api/SQL/Drop\ Tables.sql
+```
+
+## Testdaten einfügen
+
+```bash
+sudo -u postgres psql -d reliefo -f /mnt/c/Users/ursdr/workspace/dotnet/reliefo-api/SQL/Testdata.sql
+```
+
+## API starten zum Testen
 
 ```bash
 dotnet watch
