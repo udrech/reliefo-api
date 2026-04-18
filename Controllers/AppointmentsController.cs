@@ -61,6 +61,17 @@ public class AppointmentsController : ControllerBase
         return Ok(appointment);
     }
 
+    [HttpGet("customer/{customerId}")]
+    public async Task<IActionResult> GetByCustomerId(int customerId)
+    {
+        var appointments = await _context.Appointments
+            .Where(a => a.CustomerId == customerId)
+            .Include(a => a.Therapy)
+            .OrderByDescending(a => a.AppointmentTimestamp)
+            .ToListAsync();
+        return Ok(appointments);
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
