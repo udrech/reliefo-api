@@ -11,5 +11,5 @@ public class AppDbContext : DbContext
     public DbSet<MedicalHistory> MedicalHistories => Set<MedicalHistory>();
     public DbSet<Appointment> Appointments => Set<Appointment>();
     public DbSet<Therapy> Therapies => Set<Therapy>();
-    public DbSet<Receipt> Receipts => Set<Receipt>();
+    public DbSet<Bill> Bills => Set<Bill>();
 }

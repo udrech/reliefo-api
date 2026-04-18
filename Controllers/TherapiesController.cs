@@ -47,7 +47,7 @@ public class TherapiesController : ControllerBase
 
         therapy.TherapyId = updated.TherapyId;
         therapy.Name = updated.Name;
-        therapy.NameOnReceipt = updated.NameOnReceipt;
+        therapy.NameOnBill = updated.NameOnBill;
         therapy.Description = updated.Description;
         therapy.Duration = updated.Duration;
         therapy.Price = updated.Price;

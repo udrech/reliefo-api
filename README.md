@@ -57,7 +57,7 @@ dotnet watch
 * **Appointment**: Termin, an dem die Therapie stattfindet.
 * **Customer**: Kunde, der die Therapie in Anspruch nimmt.
 * **MedicalHistory**: Medizinische Krankengeschichte eines Kunden, die für die Therapie relevant sein könnte. Eintrags-Typen: Anamnese, Allergien, Medikamente, Vorerkrankungen, etc.
-* **Receipt**: Quittung, welche nach einer Therapie ausgestellt wird.
+* **Bill**: Rechnung/Quittung, welche nach einer Therapie ausgestellt wird.
 * **Therapy**: Therapie, welche an dem Termin stattfindet.
 
 ## Nächste Schritte

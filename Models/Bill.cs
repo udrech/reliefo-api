@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace reliefo_api.Models;
 
-[Table("receipts")]
-public class Receipt
+[Table("bills")]
+public class Bill
 {
     [Column("id")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,8 +16,8 @@ public class Receipt
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
-    [Column("receipt_timestamp")]
-    public DateTime ReceiptTimestamp { get; set; } = DateTime.UtcNow;
+    [Column("bill_timestamp")]
+    public DateTime BillTimestamp { get; set; } = DateTime.UtcNow;
 
     [Column("file")]
     [StringLength(255)]

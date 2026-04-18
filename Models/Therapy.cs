@@ -17,8 +17,8 @@ public class Therapy
     [StringLength(100)]
     public string Name { get; set; } = null!;
 
-    [Column("name_on_receipt")]
-    public string? NameOnReceipt { get; set; } = null!;
+    [Column("name_on_bill")]
+    public string? NameOnBill { get; set; } = null!;
 
     [Column("description")]
     public string? Description { get; set; } = null!;
