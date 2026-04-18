@@ -10,9 +10,15 @@ public class Therapy
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
+    [Column("therapy_id")]
+    public int? TherapyId { get; set; }
+
     [Column("name")]
     [StringLength(100)]
     public string Name { get; set; } = null!;
+
+    [Column("name_on_receipt")]
+    public string? NameOnReceipt { get; set; } = null!;
 
     [Column("description")]
     public string? Description { get; set; } = null!;
@@ -23,8 +29,8 @@ public class Therapy
     [Column("price")]
     public decimal? Price { get; set; } = null!;
 
-    [Column("valid_until")]
-    public DateTime ValidUntil { get; set; } = DateTime.UtcNow.AddYears(10);
+    [Column("valid_from")]
+    public DateTime ValidFrom { get; set; } = DateTime.UtcNow;
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

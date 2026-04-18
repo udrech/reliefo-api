@@ -45,11 +45,13 @@ public class TherapiesController : ControllerBase
         var therapy = await _context.Therapies.FindAsync(id);
         if (therapy is null) return NotFound();
 
+        therapy.TherapyId = updated.TherapyId;
         therapy.Name = updated.Name;
+        therapy.NameOnReceipt = updated.NameOnReceipt;
         therapy.Description = updated.Description;
         therapy.Duration = updated.Duration;
         therapy.Price = updated.Price;
-        therapy.ValidUntil = updated.ValidUntil;
+        therapy.ValidFrom = updated.ValidFrom;
         therapy.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

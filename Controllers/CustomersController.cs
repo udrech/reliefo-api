@@ -50,6 +50,7 @@ public class CustomersController : ControllerBase
 
         customer.FirstName = updated.FirstName;
         customer.LastName = updated.LastName;
+        customer.DateOfBirth = updated.DateOfBirth;
         customer.Address = updated.Address;
         customer.City = updated.City;
         customer.ZipCode = updated.ZipCode;

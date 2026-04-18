@@ -18,6 +18,9 @@ public class Customer
     [StringLength(100)]
     public string FirstName { get; set; } = string.Empty;
 
+    [Column("date_of_birth")]
+    public DateTime? DateOfBirth { get; set; }
+
     [Column("address")]
     [StringLength(255)]
     public string? Address { get; set; } = null!;
