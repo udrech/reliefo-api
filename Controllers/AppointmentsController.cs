@@ -41,6 +41,8 @@ public class AppointmentsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Appointment appointment)
     {
+        appointment.CreatedAt = DateTime.UtcNow;
+        appointment.UpdatedAt = DateTime.UtcNow;
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = appointment.Id }, appointment);

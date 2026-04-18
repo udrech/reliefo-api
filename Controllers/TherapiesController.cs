@@ -34,6 +34,8 @@ public class TherapiesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Therapy therapy)
     {
+        therapy.CreatedAt = DateTime.UtcNow;
+        therapy.UpdatedAt = DateTime.UtcNow;
         _context.Therapies.Add(therapy);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = therapy.Id }, therapy);

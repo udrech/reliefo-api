@@ -37,6 +37,8 @@ public class CustomersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Customer customer)
     {
+        customer.CreatedAt = DateTime.UtcNow;
+        customer.UpdatedAt = DateTime.UtcNow;
         _context.Customers.Add(customer);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = customer.Id }, customer);

@@ -38,6 +38,8 @@ public class BillsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Bill bill)
     {
+        bill.CreatedAt = DateTime.UtcNow;
+        bill.UpdatedAt = DateTime.UtcNow;
         _context.Bills.Add(bill);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = bill.Id }, bill);

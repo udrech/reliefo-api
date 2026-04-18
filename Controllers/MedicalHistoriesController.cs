@@ -38,6 +38,8 @@ public class MedicalHistoriesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] MedicalHistory record)
     {
+        record.CreatedAt = DateTime.UtcNow;
+        record.UpdatedAt = DateTime.UtcNow;
         _context.MedicalHistories.Add(record);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = record.Id }, record);
