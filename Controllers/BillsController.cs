@@ -21,6 +21,18 @@ public class BillsController : ControllerBase
     {
         var bills = await _context.Bills
             .Include(b => b.Customer)
+            .OrderByDescending(b => b.CreatedAt)
+            .ToListAsync();
+        return Ok(bills);
+    }
+
+    [HttpGet("customer/{customerId}")]
+    public async Task<IActionResult> GetByCustomerId(int customerId)
+    {
+        var bills = await _context.Bills
+            .Where(b => b.CustomerId == customerId)
+            .Include(b => b.Customer)
+            .OrderByDescending(b => b.CreatedAt)
             .ToListAsync();
         return Ok(bills);
     }
