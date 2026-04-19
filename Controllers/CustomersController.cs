@@ -75,6 +75,15 @@ public class CustomersController : ControllerBase
         var customer = await _context.Customers.FindAsync(id);
         if (customer is null) return NotFound();
 
+        var hasAppointments = await _context.Appointments.AnyAsync(a => a.CustomerId == id);
+        if (hasAppointments) return Conflict("Löschen nicht möglich: Kunde hat Termine.");
+
+        var hasBills = await _context.Bills.AnyAsync(b => b.CustomerId == id);
+        if (hasBills) return Conflict("Löschen nicht möglich: Kunde hat Quittungen.");
+
+        var hasMedicalHistories = await _context.MedicalHistories.AnyAsync(m => m.CustomerId == id);
+        if (hasMedicalHistories) return Conflict("Löschen nicht möglich: Kunde hat KG Einträge.");
+
         _context.Customers.Remove(customer);
         await _context.SaveChangesAsync();
         return NoContent();
