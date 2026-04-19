@@ -7,11 +7,11 @@ namespace reliefo_api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class MedicalHistoriesController : ControllerBase
+public class MedicalHistoryRecordsController : ControllerBase
 {
     private readonly AppDbContext _context;
 
-    public MedicalHistoriesController(AppDbContext context)
+    public MedicalHistoryRecordsController(AppDbContext context)
     {
         _context = context;
     }
@@ -19,7 +19,7 @@ public class MedicalHistoriesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var records = await _context.MedicalHistories
+        var records = await _context.MedicalHistoryRecords
             .Include(m => m.Customer)
             .ToListAsync();
         return Ok(records);
@@ -28,7 +28,7 @@ public class MedicalHistoriesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var record = await _context.MedicalHistories
+        var record = await _context.MedicalHistoryRecords
             .Include(m => m.Customer)
             .FirstOrDefaultAsync(m => m.Id == id);
         if (record is null) return NotFound();
@@ -36,19 +36,19 @@ public class MedicalHistoriesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] MedicalHistory record)
+    public async Task<IActionResult> Create([FromBody] MedicalHistoryRecord record)
     {
         record.CreatedAt = DateTime.UtcNow;
         record.UpdatedAt = DateTime.UtcNow;
-        _context.MedicalHistories.Add(record);
+        _context.MedicalHistoryRecords.Add(record);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = record.Id }, record);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] MedicalHistory updated)
+    public async Task<IActionResult> Update(int id, [FromBody] MedicalHistoryRecord updated)
     {
-        var record = await _context.MedicalHistories.FindAsync(id);
+        var record = await _context.MedicalHistoryRecords.FindAsync(id);
         if (record is null) return NotFound();
 
         record.CustomerId = updated.CustomerId;
@@ -64,10 +64,10 @@ public class MedicalHistoriesController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var record = await _context.MedicalHistories.FindAsync(id);
+        var record = await _context.MedicalHistoryRecords.FindAsync(id);
         if (record is null) return NotFound();
 
-        _context.MedicalHistories.Remove(record);
+        _context.MedicalHistoryRecords.Remove(record);
         await _context.SaveChangesAsync();
         return NoContent();
     }

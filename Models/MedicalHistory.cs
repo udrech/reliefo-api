@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace reliefo_api.Models;
 
-[Table("medical_histories")]
-public class MedicalHistory
+[Table("medical_history_records")]
+public class MedicalHistoryRecord
 {
     [Column("id")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

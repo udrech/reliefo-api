@@ -58,12 +58,12 @@ VALUES (1, 2, '2026-05-06 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, appointment_timestamp, created_at, updated_at)
 VALUES (2, 3, '2026-05-07 14:00:00', NOW(), NOW());
 
--- TRUNCATE TABLE medical_histories;
-INSERT INTO medical_histories (customers_id, history_timestamp, type, note, created_at, updated_at)
+-- TRUNCATE TABLE medical_history_records;
+INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, created_at, updated_at)
 VALUES (1, '2026-04-10 10:00:00', 'Medikamente', 'Blutdrucksenkung', NOW(), NOW());
-INSERT INTO medical_histories (customers_id, history_timestamp, type, note, created_at, updated_at)
+INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, created_at, updated_at)
 VALUES (2, '2026-04-11 14:00:00', 'Anamnese', 'Verspannungen im Schulterbereich, vor allem links', NOW(), NOW());
-INSERT INTO medical_histories (customers_id, history_timestamp, type, note, created_at, updated_at)
+INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, created_at, updated_at)
 VALUES (3, '2026-04-12 14:00:00', 'Anamnese', 'Knieschmerzen seit 3 Jahren', NOW(), NOW());
 
 -- TRUNCATE TABLE bills;
