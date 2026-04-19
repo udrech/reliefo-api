@@ -5,7 +5,6 @@ Reliefo Therapy App API
 ## ToDo
 
 * Löschen mit vorgängiger Prüfung auf bestehende Verweise
-* API Endpunkt / welcher eine einfache Textanwort gibt
 
 ## DB erstellen
 
