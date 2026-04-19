@@ -80,6 +80,8 @@ public class AppointmentsController : ControllerBase
         var appointment = await _context.Appointments.FindAsync(id);
         if (appointment is null) return NotFound();
 
+        // ToDo: prüfen ob Termin in Rechnung verwendet wird
+
         _context.Appointments.Remove(appointment);
         await _context.SaveChangesAsync();
         return NoContent();
