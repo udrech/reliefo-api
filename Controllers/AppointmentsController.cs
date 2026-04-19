@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using reliefo_api.Data;
 using reliefo_api.Models;
@@ -45,7 +45,11 @@ public class AppointmentsController : ControllerBase
             .Include(a => a.Customer)
             .Include(a => a.Therapy)
             .FirstOrDefaultAsync(a => a.Id == id);
-        if (appointment is null) return NotFound();
+        if (appointment is null)
+        {
+            return NotFound();
+        }
+
         return Ok(appointment);
     }
 
@@ -63,7 +67,10 @@ public class AppointmentsController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] Appointment updated)
     {
         var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment is null) return NotFound();
+        if (appointment is null)
+        {
+            return NotFound();
+        }
 
         appointment.CustomerId = updated.CustomerId;
         appointment.TherapyId = updated.TherapyId;
@@ -78,10 +85,12 @@ public class AppointmentsController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment is null) return NotFound();
+        if (appointment is null)
+        {
+            return NotFound();
+        }
 
         // ToDo: prüfen ob Termin in Rechnung verwendet wird
-
         _context.Appointments.Remove(appointment);
         await _context.SaveChangesAsync();
         return NoContent();

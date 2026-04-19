@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using reliefo_api.Data;
 using reliefo_api.Models;
@@ -43,7 +43,11 @@ public class BillsController : ControllerBase
         var bill = await _context.Bills
             .Include(b => b.Customer)
             .FirstOrDefaultAsync(b => b.Id == id);
-        if (bill is null) return NotFound();
+        if (bill is null)
+        {
+            return NotFound();
+        }
+
         return Ok(bill);
     }
 
@@ -61,7 +65,10 @@ public class BillsController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] Bill updated)
     {
         var bill = await _context.Bills.FindAsync(id);
-        if (bill is null) return NotFound();
+        if (bill is null)
+        {
+            return NotFound();
+        }
 
         bill.CustomerId = updated.CustomerId;
         bill.File = updated.File;
@@ -76,7 +83,10 @@ public class BillsController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var bill = await _context.Bills.FindAsync(id);
-        if (bill is null) return NotFound();
+        if (bill is null)
+        {
+            return NotFound();
+        }
 
         _context.Bills.Remove(bill);
         await _context.SaveChangesAsync();

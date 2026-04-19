@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using reliefo_api.Data;
 using reliefo_api.Models;
@@ -31,7 +31,11 @@ public class MedicalHistoryRecordsController : ControllerBase
         var record = await _context.MedicalHistoryRecords
             .Include(m => m.Customer)
             .FirstOrDefaultAsync(m => m.Id == id);
-        if (record is null) return NotFound();
+        if (record is null)
+        {
+            return NotFound();
+        }
+
         return Ok(record);
     }
 
@@ -49,7 +53,10 @@ public class MedicalHistoryRecordsController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] MedicalHistoryRecord updated)
     {
         var record = await _context.MedicalHistoryRecords.FindAsync(id);
-        if (record is null) return NotFound();
+        if (record is null)
+        {
+            return NotFound();
+        }
 
         record.CustomerId = updated.CustomerId;
         record.HistoryTimestamp = updated.HistoryTimestamp;
@@ -65,7 +72,10 @@ public class MedicalHistoryRecordsController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var record = await _context.MedicalHistoryRecords.FindAsync(id);
-        if (record is null) return NotFound();
+        if (record is null)
+        {
+            return NotFound();
+        }
 
         _context.MedicalHistoryRecords.Remove(record);
         await _context.SaveChangesAsync();

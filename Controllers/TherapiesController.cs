@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using reliefo_api.Data;
 using reliefo_api.Models;
@@ -27,7 +27,11 @@ public class TherapiesController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var therapy = await _context.Therapies.FindAsync(id);
-        if (therapy is null) return NotFound();
+        if (therapy is null)
+        {
+            return NotFound();
+        }
+
         return Ok(therapy);
     }
 
@@ -45,7 +49,10 @@ public class TherapiesController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] Therapy updated)
     {
         var therapy = await _context.Therapies.FindAsync(id);
-        if (therapy is null) return NotFound();
+        if (therapy is null)
+        {
+            return NotFound();
+        }
 
         therapy.TherapyId = updated.TherapyId;
         therapy.Name = updated.Name;
@@ -64,13 +71,18 @@ public class TherapiesController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var therapy = await _context.Therapies.FindAsync(id);
-        if (therapy is null) return NotFound();
+        if (therapy is null)
+        {
+            return NotFound();
+        }
 
         var hasAppointments = await _context.Appointments.AnyAsync(a => a.TherapyId == id);
-        if (hasAppointments) return Conflict("Löschen nicht möglich: Es gibt Termine für diese Therapie.");
+        if (hasAppointments)
+        {
+            return Conflict("Löschen nicht möglich: Es gibt Termine für diese Therapie.");
+        }
 
         // ToDo: prüfen ob Therapie in Rechnung verwendet wird
-
         _context.Therapies.Remove(therapy);
         await _context.SaveChangesAsync();
         return NoContent();

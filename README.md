@@ -52,6 +52,13 @@ sudo -u postgres psql -d reliefo -f /mnt/c/Users/ursdr/workspace/dotnet/reliefo-
 dotnet watch
 ```
 
+## Code formatieren mit StyleCop
+
+```bash
+dotnet add package StyleCop.Analyzers
+dotnet format reliefo-api.csproj --verify-no-changes
+```
+
 ## Begriffsdefinitionen
 
 * **Appointment**: Termin, an dem die Therapie stattfindet.
