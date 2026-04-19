@@ -4,7 +4,8 @@ Reliefo Therapy App API
 
 ## ToDo
 
-* Feld birthdate in Customer hinzufügen
+* Löschen mit vorgängiger Prüfung auf bestehende Verweise
+* API Endpunkt / welcher eine einfache Textanwort gibt
 
 ## DB erstellen
 
