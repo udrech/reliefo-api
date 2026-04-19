@@ -79,7 +79,7 @@ dotnet format reliefo-api.csproj --verify-no-changes
 ```bash
 git clone https://github.com/udrech/reliefo-api.git
 cd reliefo-api
-pack build reliefo --builder paketobuildpacks/builder-jammy-base
+sudo pack build reliefo --builder paketobuildpacks/builder-jammy-base
 ```
 
 ## Container Image testen mit Docker
