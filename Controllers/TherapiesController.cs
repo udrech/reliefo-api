@@ -66,6 +66,11 @@ public class TherapiesController : ControllerBase
         var therapy = await _context.Therapies.FindAsync(id);
         if (therapy is null) return NotFound();
 
+        var hasAppointments = await _context.Appointments.AnyAsync(a => a.TherapyId == id);
+        if (hasAppointments) return Conflict("Löschen nicht möglich: Es gibt Termine für diese Therapie.");
+
+        // ToDo: prüfen ob Therapie in Rechnung verwendet wird
+
         _context.Therapies.Remove(therapy);
         await _context.SaveChangesAsync();
         return NoContent();

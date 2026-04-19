@@ -82,7 +82,7 @@ public class CustomersController : ControllerBase
         if (hasBills) return Conflict("Löschen nicht möglich: Kunde hat Quittungen.");
 
         var hasMedicalHistoryRecords = await _context.MedicalHistoryRecords.AnyAsync(m => m.CustomerId == id);
-        if (hasMedicalHistoryRecords) return Conflict("Löschen nicht möglich: Kunde hat KG Einträge.");
+        if (hasMedicalHistoryRecords) return Conflict("Löschen nicht möglich: Kunde hat KG-Einträge.");
 
         _context.Customers.Remove(customer);
         await _context.SaveChangesAsync();
