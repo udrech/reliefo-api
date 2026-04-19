@@ -82,9 +82,24 @@ cd reliefo-api
 sudo pack build reliefo --builder paketobuildpacks/builder-jammy-base
 ```
 
-## Container Image testen mit Docker
+## Container Image testen mit Docker (ohne DB-Verbindung)
 
 ```bash
 sudo docker run -d -p 8080:8080 -e PORT=8080 reliefo
 curl http://localhost:8080/api/
+```
+
+## Container Image testen mit Docker (mit DB-Verbindung)
+
+```bash
+sudo docker run -d -p 8080:8080 -e PORT=8080 -e ConnectionStrings__DefaultConnection="Host=192.168.149.60;Database=reliefo;Username=reliefo;Password=your_secure_password" reliefo
+curl http://localhost:8080/api/customers/
+```
+
+## Constainer Image in GitHub Container Registry pushen
+
+```bash
+echo YOUR_PAT | sudo docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
+sudo docker tag reliefo ghcr.io/udrech/reliefo:latest
+sudo docker push ghcr.io/udrech/reliefo:latest
 ```
