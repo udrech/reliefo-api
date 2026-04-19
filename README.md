@@ -6,6 +6,21 @@ Reliefo Therapy App API
 
 * Löschen mit vorgängiger Prüfung auf bestehende Verweise
 
+## Nächste Schritte
+
+* Container Image erstellen mit Paketo Buildpacks
+* Image testen
+* CI/CD Pipeline mit GitHub Actions erstellen
+* Installation auf Server mit Docker Compose
+
+## Begriffsdefinitionen
+
+* **Appointment**: Termin, an dem die Therapie stattfindet.
+* **Customer**: Kunde, der die Therapie in Anspruch nimmt.
+* **MedicalHistoryRecord**: Medizinische Krankengeschichte Eintrag eines Kunden, der für die Therapie relevant sein könnte. Eintrags-Typen: Anamnese, Allergien, Medikamente, Vorerkrankungen, Verlauf, etc.
+* **Bill**: Rechnung/Quittung, welche nach einer Therapie ausgestellt wird.
+* **Therapy**: Therapie, welche an dem Termin stattfindet.
+
 ## DB erstellen
 
 ```bash
@@ -46,7 +61,7 @@ sudo -u postgres psql -d reliefo -f /mnt/c/Users/ursdr/workspace/dotnet/reliefo-
 sudo -u postgres psql -d reliefo -f /mnt/c/Users/ursdr/workspace/dotnet/reliefo-api/SQL/Testdata.sql
 ```
 
-## API starten zum Testen
+## API starten während der Entwicklung
 
 ```bash
 dotnet watch
@@ -59,17 +74,17 @@ dotnet add package StyleCop.Analyzers
 dotnet format reliefo-api.csproj --verify-no-changes
 ```
 
-## Begriffsdefinitionen
+## Container Image erstellen auf WSL
 
-* **Appointment**: Termin, an dem die Therapie stattfindet.
-* **Customer**: Kunde, der die Therapie in Anspruch nimmt.
-* **MedicalHistoryRecord**: Medizinische Krankengeschichte Eintrag eines Kunden, der für die Therapie relevant sein könnte. Eintrags-Typen: Anamnese, Allergien, Medikamente, Vorerkrankungen, Verlauf, etc.
-* **Bill**: Rechnung/Quittung, welche nach einer Therapie ausgestellt wird.
-* **Therapy**: Therapie, welche an dem Termin stattfindet.
+```bash
+git clone https://github.com/udrech/reliefo-api.git
+cd reliefo-api
+pack build reliefo --builder paketobuildpacks/builder-jammy-base
+```
 
-## Nächste Schritte
+## Container Image testen mit Docker
 
-* Tabellen erstellen lassen und prüfen
-* Refential Constraints hinzufügen
-* Testdaten einfügen
-* Tests mit Postman
+```bash
+sudo docker run -d -p 8080:8080 -e PORT=8080 reliefo
+curl http://localhost:8080/api/
+```
