@@ -18,8 +18,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+// API Test-Endpoint
 app.MapGet("/api/", () => Results.Text("Reliefo API"));
 
+app.UseDefaultFiles(); // rewrites / to /index.html
+app.MapStaticAssets(); // serves wwwroot with fingerprinting + compression
+
 app.MapControllers();
+
+app.MapFallbackToFile("index.html"); // Angular client-side routing
 
 app.Run();
