@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using reliefo_api.Data;
+using reliefo_api.DTOs;
 using reliefo_api.Models;
 
 namespace reliefo_api.Controllers;
@@ -52,10 +54,16 @@ public class BillsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Bill bill)
+    public async Task<IActionResult> Create([FromBody] BillPayload payload)
     {
-        bill.CreatedAt = DateTime.UtcNow;
-        bill.UpdatedAt = DateTime.UtcNow;
+        var bill = new Bill
+        {
+            CustomerId = payload.CustomerId,
+            File = "test.pdf",
+            Data = JsonSerializer.Serialize(payload.Appointments),
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+        };
         _context.Bills.Add(bill);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = bill.Id }, bill);
