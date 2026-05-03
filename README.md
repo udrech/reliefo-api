@@ -4,14 +4,15 @@ Reliefo Therapy App API
 
 ## ToDo
 
+* Quittung erstellen mit PDF erstellen via carbone.io
 * Löschen mit vorgängiger Prüfung auf bestehende Verweise
 
 ## Nächste Schritte
 
+* API Funktionen fertig implementieren
 * Container Image erstellen mit Paketo Buildpacks
-* Image testen
+* Image testen auf Notebook mit Postman
 * CI/CD Pipeline mit GitHub Actions erstellen
-* Installation auf Server mit Docker Compose
 
 ## Begriffsdefinitionen
 
