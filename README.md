@@ -104,3 +104,15 @@ echo YOUR_PAT | sudo docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-std
 sudo docker tag reliefo ghcr.io/udrech/reliefo:latest
 sudo docker push ghcr.io/udrech/reliefo:latest
 ```
+
+## Datenstruktur für carbone.io
+
+```json
+{
+  "bill": {
+    "customer": {
+        ...
+    },
+    appointments: []
+  }
+}
