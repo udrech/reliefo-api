@@ -105,14 +105,30 @@ sudo docker tag reliefo ghcr.io/udrech/reliefo:latest
 sudo docker push ghcr.io/udrech/reliefo:latest
 ```
 
-## Datenstruktur für carbone.io
+## Datenstruktur für carbone.io Studio
 
 ```json
 {
-  "bill": {
-    "customer": {
-        ...
-    },
-    appointments: []
-  }
+  "appointments": [],
+  "CreatedAt": "2024-06-01T12:00:00Z",
+  "customer": {},
+  "Number": 999,
+  "TotalPrice": 999
 }
+```
+
+## carbone.io Test mit curl
+
+```bash
+curl --location --request POST "https://api.carbone.io/render/1412795548263211167" \
+     --header "carbone-version: 5" \
+     --header "Content-Type: application/json" \
+     --header "Authorization: Bearer ..." \
+     --data @request.json
+```
+
+```bash
+curl "https://api.carbone.io/render/MTAuMjAuMjEuNTIgICAgKGMtlbG4HoVY5y9KPZO49AcmVwb3J0.pdf" \
+     --header "Authorization: Bearer ..." \
+     --output bills/MTAuMjAuMjEuNTIgICAgKGMtlbG4HoVY5y9KPZO49AcmVwb3J0.pdf
+```
