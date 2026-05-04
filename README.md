@@ -4,7 +4,6 @@ Reliefo Therapy App API
 
 ## ToDo
 
-* Quittung erstellen mit PDF erstellen via carbone.io
 * Löschen mit vorgängiger Prüfung auf bestehende Verweise
 
 ## Nächste Schritte
