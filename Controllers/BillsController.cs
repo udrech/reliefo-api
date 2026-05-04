@@ -79,7 +79,6 @@ public class BillsController : ControllerBase
         // var debugJson = JsonSerializer.Serialize(billData, new JsonSerializerOptions { WriteIndented = true });
         // await System.IO.File.WriteAllTextAsync("data.json", debugJson);
         // return Ok();
-
         var (renderId, filePath) = await CreateCarboneReport(billData);
 
         var bill = new Bill
@@ -149,7 +148,6 @@ public class BillsController : ControllerBase
         // print request body as json to debug
         // var debugJson = JsonSerializer.Serialize(requestBody, new JsonSerializerOptions { WriteIndented = true });
         // await System.IO.File.WriteAllTextAsync("request.json", debugJson);
-
         var client = _httpClientFactory.CreateClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
         client.DefaultRequestHeaders.Add("carbone-version", "5");
