@@ -86,7 +86,7 @@ public class BillsController : ControllerBase
         {
             CustomerId = payload.CustomerId,
             File = renderId,
-            Data = JsonSerializer.Serialize(billData),
+            Data = JsonSerializer.Serialize(billData, new JsonSerializerOptions { WriteIndented = true }),
             CreatedAt = now,
             UpdatedAt = now,
         };
