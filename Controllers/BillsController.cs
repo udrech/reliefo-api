@@ -85,7 +85,7 @@ public class BillsController : ControllerBase
         var bill = new Bill
         {
             CustomerId = payload.CustomerId,
-            File = $"{renderId}.pdf",
+            File = renderId,
             Data = JsonSerializer.Serialize(billData),
             CreatedAt = now,
             UpdatedAt = now,
@@ -94,7 +94,7 @@ public class BillsController : ControllerBase
         await _context.SaveChangesAsync();
 
         var pdfBytes = await System.IO.File.ReadAllBytesAsync(filePath);
-        return File(pdfBytes, "application/pdf", $"{renderId}.pdf");
+        return File(pdfBytes, "application/pdf", renderId);
     }
 
     [HttpPut("{id}")]
@@ -166,7 +166,7 @@ public class BillsController : ControllerBase
         downloadResponse.EnsureSuccessStatusCode();
 
         Directory.CreateDirectory(billsDirectory);
-        var filePath = Path.Combine(billsDirectory, $"{renderId}.pdf");
+        var filePath = Path.Combine(billsDirectory, renderId);
         var pdfBytes = await downloadResponse.Content.ReadAsByteArrayAsync();
         await System.IO.File.WriteAllBytesAsync(filePath, pdfBytes);
 
