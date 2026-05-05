@@ -32,7 +32,7 @@ namespace reliefo_api.Migrations
                     healthinsurance_provider = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     healthinsurance_id = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,15 +45,15 @@ namespace reliefo_api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    therapy_id = table.Column<int>(type: "integer", nullable: true),
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    name_on_bill = table.Column<string>(type: "text", nullable: true),
+                    name_on_bill = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: true),
                     duration = table.Column<int>(type: "integer", nullable: true),
-                    price = table.Column<decimal>(type: "numeric", nullable: true),
+                    price = table.Column<decimal>(type: "numeric", nullable: false),
                     valid_from = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    valid_to = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace reliefo_api.Migrations
                     file = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     data = table.Column<string>(type: "text", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +94,7 @@ namespace reliefo_api.Migrations
                     type = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     note = table.Column<string>(type: "text", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,9 +115,10 @@ namespace reliefo_api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     customers_id = table.Column<int>(type: "integer", nullable: false),
                     therapies_id = table.Column<int>(type: "integer", nullable: false),
+                    bill_id = table.Column<int>(type: "integer", nullable: true),
                     appointment_timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

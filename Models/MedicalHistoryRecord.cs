@@ -21,10 +21,10 @@ public class MedicalHistoryRecord
 
     [Column("type")]
     [StringLength(100)]
-    public string? Type { get; set; } = null!;
+    public string? Type { get; set; } = null;
 
     [Column("note")]
-    public string Note { get; set; } = null!;
+    public string Note { get; set; } = string.Empty;
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

@@ -35,6 +35,10 @@ namespace reliefo_api.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("appointment_timestamp");
 
+                    b.Property<int?>("BillId")
+                        .HasColumnType("integer")
+                        .HasColumnName("bill_id");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
@@ -256,16 +260,13 @@ namespace reliefo_api.Migrations
                         .HasColumnName("name");
 
                     b.Property<string>("NameOnBill")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name_on_bill");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("numeric")
                         .HasColumnName("price");
-
-                    b.Property<int?>("TherapyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("therapy_id");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -274,6 +275,10 @@ namespace reliefo_api.Migrations
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("valid_from");
+
+                    b.Property<DateTime?>("ValidTo")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("valid_to");
 
                     b.HasKey("Id");
 

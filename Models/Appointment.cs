@@ -22,6 +22,9 @@ public class Appointment
     [ForeignKey("TherapyId")]
     public Therapy? Therapy { get; set; }
 
+    [Column("bill_id")]
+    public int? BillId { get; set; } = null;
+
     [Column("appointment_timestamp")]
     public DateTime AppointmentTimestamp { get; set; }
 

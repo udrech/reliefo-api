@@ -74,6 +74,7 @@ public class AppointmentsController : ControllerBase
 
         appointment.CustomerId = updated.CustomerId;
         appointment.TherapyId = updated.TherapyId;
+        appointment.BillId = updated.BillId;
         appointment.AppointmentTimestamp = updated.AppointmentTimestamp;
         appointment.UpdatedAt = DateTime.UtcNow;
 

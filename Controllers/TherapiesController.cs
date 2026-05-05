@@ -54,13 +54,13 @@ public class TherapiesController : ControllerBase
             return NotFound();
         }
 
-        therapy.TherapyId = updated.TherapyId;
         therapy.Name = updated.Name;
         therapy.NameOnBill = updated.NameOnBill;
         therapy.Description = updated.Description;
         therapy.Duration = updated.Duration;
         therapy.Price = updated.Price;
         therapy.ValidFrom = updated.ValidFrom;
+        therapy.ValidTo = updated.ValidTo;
         therapy.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

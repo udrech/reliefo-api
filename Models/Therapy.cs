@@ -10,27 +10,27 @@ public class Therapy
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    [Column("therapy_id")]
-    public int? TherapyId { get; set; }
-
     [Column("name")]
     [StringLength(100)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; } = string.Empty;
 
     [Column("name_on_bill")]
-    public string? NameOnBill { get; set; } = null!;
+    public string NameOnBill { get; set; } = string.Empty;
 
     [Column("description")]
-    public string? Description { get; set; } = null!;
+    public string? Description { get; set; } = null;
 
     [Column("duration")]
-    public int? Duration { get; set; }
+    public int? Duration { get; set; } = null;
 
     [Column("price")]
-    public decimal? Price { get; set; } = null!;
+    public decimal Price { get; set; } = 0;
 
     [Column("valid_from")]
     public DateTime ValidFrom { get; set; } = DateTime.UtcNow;
+
+    [Column("valid_to")]
+    public DateTime? ValidTo { get; set; } = null;
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
