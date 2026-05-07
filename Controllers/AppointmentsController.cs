@@ -33,6 +33,7 @@ public class AppointmentsController : ControllerBase
         var appointments = await _context.Appointments
             .Where(a => a.CustomerId == customerId)
             .Include(a => a.Therapy)
+            .Include(a => a.Bill)
             .OrderByDescending(a => a.AppointmentTimestamp)
             .ToListAsync();
         return Ok(appointments);
