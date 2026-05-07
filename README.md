@@ -70,7 +70,7 @@ dotnet watch
 
 ```bash
 dotnet add package StyleCop.Analyzers
-dotnet format reliefo-api.csproj --verify-no-changes
+dotnet format reliefo-api.csproj --exclude **/Migrations/** --verify-no-changes
 ```
 
 ## Container Image erstellen auf WSL
