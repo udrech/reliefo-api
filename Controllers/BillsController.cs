@@ -63,8 +63,16 @@ public class BillsController : ControllerBase
     {
         var now = DateTime.UtcNow;
         var customer = await _context.Customers.FindAsync(payload.CustomerId);
-        var billNumber = 999;
+
+        // billNumber = max bill number for this customer + 1, or 1 if there are no bills for this customer
+        var maxBillNumber = await _context.Bills
+            .Where(b => b.CustomerId == payload.CustomerId)
+            .MaxAsync(b => (int?)b.CustomerBillNumber) ?? 0;
+        var billNumber = maxBillNumber + 1;
+
+        // parse JSON array of appointments and sum up the total price
         var totalPrice = 999;
+
         var billData = new
         {
             appointments = payload.Appointments,
@@ -84,7 +92,8 @@ public class BillsController : ControllerBase
         var bill = new Bill
         {
             CustomerId = payload.CustomerId,
-            File = renderId,
+            CustomerBillNumber = billNumber,
+            Filename = renderId,
             Data = JsonSerializer.Serialize(billData, new JsonSerializerOptions { WriteIndented = true }),
             CreatedAt = now,
             UpdatedAt = now,
@@ -94,24 +103,6 @@ public class BillsController : ControllerBase
 
         var pdfBytes = await System.IO.File.ReadAllBytesAsync(filePath);
         return File(pdfBytes, "application/pdf", renderId);
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Bill updated)
-    {
-        var bill = await _context.Bills.FindAsync(id);
-        if (bill is null)
-        {
-            return NotFound();
-        }
-
-        bill.CustomerId = updated.CustomerId;
-        bill.File = updated.File;
-        bill.Data = updated.Data;
-        bill.UpdatedAt = DateTime.UtcNow;
-
-        await _context.SaveChangesAsync();
-        return Ok(bill);
     }
 
     [HttpDelete("{id}")]
