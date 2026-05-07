@@ -25,6 +25,9 @@ public class Appointment
     [Column("bill_id")]
     public int? BillId { get; set; } = null;
 
+    [ForeignKey("BillId")]
+    public Bill? Bill { get; set; }
+
     [Column("appointment_timestamp")]
     public DateTime AppointmentTimestamp { get; set; }
 

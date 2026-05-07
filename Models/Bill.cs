@@ -16,12 +16,15 @@ public class Bill
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
-    [Column("file")]
+    [Column("customer_bill_number")]
+    public int? CustomerBillNumber { get; set; } = null;
+
+    [Column("filename")]
     [StringLength(255)]
-    public string File { get; set; } = null!;
+    public string Filename { get; set; } = string.Empty;
 
     [Column("data")]
-    public string Data { get; set; } = null!;
+    public string Data { get; set; } = string.Empty;
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
