@@ -57,6 +57,8 @@ namespace reliefo_api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BillId");
+
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("TherapyId");
@@ -77,6 +79,10 @@ namespace reliefo_api.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
+                    b.Property<int?>("CustomerBillNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("customer_bill_number");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer")
                         .HasColumnName("customers_id");
@@ -86,11 +92,11 @@ namespace reliefo_api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("data");
 
-                    b.Property<string>("File")
+                    b.Property<string>("Filename")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
-                        .HasColumnName("file");
+                        .HasColumnName("filename");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -287,6 +293,10 @@ namespace reliefo_api.Migrations
 
             modelBuilder.Entity("reliefo_api.Models.Appointment", b =>
                 {
+                    b.HasOne("reliefo_api.Models.Bill", "Bill")
+                        .WithMany()
+                        .HasForeignKey("BillId");
+
                     b.HasOne("reliefo_api.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
@@ -298,6 +308,8 @@ namespace reliefo_api.Migrations
                         .HasForeignKey("TherapyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Bill");
 
                     b.Navigation("Customer");
 

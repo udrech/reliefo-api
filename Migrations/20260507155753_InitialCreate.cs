@@ -67,7 +67,8 @@ namespace reliefo_api.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     customers_id = table.Column<int>(type: "integer", nullable: false),
-                    file = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    customer_bill_number = table.Column<int>(type: "integer", nullable: true),
+                    filename = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     data = table.Column<string>(type: "text", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -124,6 +125,11 @@ namespace reliefo_api.Migrations
                 {
                     table.PrimaryKey("PK_appointments", x => x.id);
                     table.ForeignKey(
+                        name: "FK_appointments_bills_bill_id",
+                        column: x => x.bill_id,
+                        principalTable: "bills",
+                        principalColumn: "id");
+                    table.ForeignKey(
                         name: "FK_appointments_customers_customers_id",
                         column: x => x.customers_id,
                         principalTable: "customers",
@@ -136,6 +142,11 @@ namespace reliefo_api.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_appointments_bill_id",
+                table: "appointments",
+                column: "bill_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_appointments_customers_id",
@@ -165,10 +176,10 @@ namespace reliefo_api.Migrations
                 name: "appointments");
 
             migrationBuilder.DropTable(
-                name: "bills");
+                name: "medical_history_records");
 
             migrationBuilder.DropTable(
-                name: "medical_history_records");
+                name: "bills");
 
             migrationBuilder.DropTable(
                 name: "therapies");
