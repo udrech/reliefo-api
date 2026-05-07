@@ -44,7 +44,6 @@ GRANT ALL ON SCHEMA public TO reliefo;
 ```bash
 rm -rf Migrations
 dotnet ef migrations add InitialCreate
-
 dotnet ef migrations add <MigrationName>
 dotnet ef database update
 ```
