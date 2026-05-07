@@ -100,9 +100,28 @@ public class BillsController : ControllerBase
         };
         _context.Bills.Add(bill);
         await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(GetById), new { id = bill.Id }, bill);
+    }
 
-        var pdfBytes = await System.IO.File.ReadAllBytesAsync(filePath);
-        return File(pdfBytes, "application/pdf", renderId);
+    [HttpGet("{id}/file")]
+    public async Task<IActionResult> GetFile(int id)
+    {
+        var bill = await _context.Bills.FindAsync(id);
+        if (bill is null)
+        {
+            return NotFound();
+        }
+
+        var billsDirectory = _configuration["Carbone:BillsDirectory"] ?? "bills";
+        var filePath = Path.Combine(billsDirectory, bill.Filename);
+
+        if (!System.IO.File.Exists(filePath))
+        {
+            return NotFound();
+        }
+
+        var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+        return File(fileBytes, "application/pdf", bill.Filename);
     }
 
     [HttpDelete("{id}")]
