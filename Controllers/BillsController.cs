@@ -71,7 +71,9 @@ public class BillsController : ControllerBase
         var billNumber = maxBillNumber + 1;
 
         // parse JSON array of appointments and sum up the total price
-        var totalPrice = 999;
+        var totalPrice = payload.Appointments
+            .Select(a => a.Therapy?.Price ?? 0)
+            .Sum();
 
         var billData = new
         {
@@ -100,6 +102,18 @@ public class BillsController : ControllerBase
         };
         _context.Bills.Add(bill);
         await _context.SaveChangesAsync();
+
+        var appointmentIds = payload.Appointments.Select(a => a.Id).ToList();
+        var appointments = await _context.Appointments
+            .Where(a => appointmentIds.Contains(a.Id))
+            .ToListAsync();
+        foreach (var appointment in appointments)
+        {
+            appointment.BillId = bill.Id;
+            appointment.UpdatedAt = DateTime.UtcNow;
+        }
+
+        await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = bill.Id }, bill);
     }
 
@@ -124,6 +138,7 @@ public class BillsController : ControllerBase
         return File(fileBytes, "application/pdf", bill.Filename);
     }
 
+    // ToDo: bill_id von appointments löschen + Datei löschen
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
