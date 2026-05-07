@@ -48,3 +48,6 @@ dotnet_diagnostic.SA1400.severity = error
 # SA1500/SA1501: Braces on their own lines
 dotnet_diagnostic.SA1500.severity = warning
 dotnet_diagnostic.SA1501.severity = warning
+
+[**/Migrations/**]
+generated_code = true
