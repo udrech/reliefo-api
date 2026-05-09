@@ -27,6 +27,7 @@ public class BillsController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var bills = await _context.Bills
+            .Where(b => b.DeletedAt == null)
             .Include(b => b.Customer)
             .OrderByDescending(b => b.CreatedAt)
             .ToListAsync();
@@ -37,7 +38,7 @@ public class BillsController : ControllerBase
     public async Task<IActionResult> GetByCustomerId(int customerId)
     {
         var bills = await _context.Bills
-            .Where(b => b.CustomerId == customerId)
+            .Where(b => b.CustomerId == customerId && b.DeletedAt == null)
             .Include(b => b.Customer)
             .OrderByDescending(b => b.CreatedAt)
             .ToListAsync();
@@ -61,14 +62,21 @@ public class BillsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] BillPayload payload)
     {
-        var now = DateTime.UtcNow;
-        var customer = await _context.Customers.FindAsync(payload.CustomerId);
+        // Create bill with empty filename and data
+        var bill = new Bill
+        {
+            CustomerId = payload.CustomerId,
+            Filename = string.Empty,
+            Data = string.Empty,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            DeletedAt = null,
+        };
+        _context.Bills.Add(bill);
+        await _context.SaveChangesAsync();
 
-        // billNumber = max bill number for this customer + 1, or 1 if there are no bills for this customer
-        var maxBillNumber = await _context.Bills
-            .Where(b => b.CustomerId == payload.CustomerId)
-            .MaxAsync(b => (int?)b.CustomerBillNumber) ?? 0;
-        var billNumber = maxBillNumber + 1;
+        // Get bill data
+        var customer = await _context.Customers.FindAsync(payload.CustomerId);
 
         // parse JSON array of appointments and sum up the total price
         var totalPrice = payload.Appointments
@@ -78,9 +86,8 @@ public class BillsController : ControllerBase
         var billData = new
         {
             appointments = payload.Appointments,
-            CreatedAt = now,
+            bill.CreatedAt,
             customer,
-            Number = billNumber,
             TotalPrice = totalPrice,
         };
 
@@ -89,24 +96,22 @@ public class BillsController : ControllerBase
         // var debugJson = JsonSerializer.Serialize(billData, new JsonSerializerOptions { WriteIndented = true });
         // await System.IO.File.WriteAllTextAsync("data.json", debugJson);
         // return Ok();
+
+        // Create report with carbone.io
         var (renderId, filePath) = await CreateCarboneReport(billData);
 
-        var bill = new Bill
-        {
-            CustomerId = payload.CustomerId,
-            CustomerBillNumber = billNumber,
-            Filename = renderId,
-            Data = JsonSerializer.Serialize(billData, new JsonSerializerOptions { WriteIndented = true }),
-            CreatedAt = now,
-            UpdatedAt = now,
-        };
-        _context.Bills.Add(bill);
+        // Update bill with filename and data
+        bill.Filename = renderId;
+        bill.Data = JsonSerializer.Serialize(billData, new JsonSerializerOptions { WriteIndented = true });
+        bill.UpdatedAt = DateTime.UtcNow;
         await _context.SaveChangesAsync();
 
+        // Update bill_id in appointments
         var appointmentIds = payload.Appointments.Select(a => a.Id).ToList();
         var appointments = await _context.Appointments
             .Where(a => appointmentIds.Contains(a.Id))
             .ToListAsync();
+
         foreach (var appointment in appointments)
         {
             appointment.BillId = bill.Id;
@@ -138,7 +143,6 @@ public class BillsController : ControllerBase
         return File(fileBytes, "application/pdf", bill.Filename);
     }
 
-    // ToDo: bill_id von appointments löschen + Datei löschen
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -148,8 +152,22 @@ public class BillsController : ControllerBase
             return NotFound();
         }
 
-        _context.Bills.Remove(bill);
+        bill.DeletedAt = DateTime.UtcNow;
         await _context.SaveChangesAsync();
+
+        // Remove bill_id in appointments
+        var appointments = await _context.Appointments
+            .Where(a => a.BillId == bill.Id)
+            .ToListAsync();
+
+        foreach (var appointment in appointments)
+        {
+            appointment.BillId = null;
+            appointment.UpdatedAt = DateTime.UtcNow;
+        }
+
+        await _context.SaveChangesAsync();
+
         return NoContent();
     }
 

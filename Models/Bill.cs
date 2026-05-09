@@ -16,9 +16,6 @@ public class Bill
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
-    [Column("customer_bill_number")]
-    public int? CustomerBillNumber { get; set; } = null;
-
     [Column("filename")]
     [StringLength(255)]
     public string Filename { get; set; } = string.Empty;
@@ -31,4 +28,7 @@ public class Bill
 
     [Column("updated_at")]
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    [Column("deleted_at")]
+    public DateTime? DeletedAt { get; set; }
 }
