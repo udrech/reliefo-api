@@ -112,7 +112,7 @@ sudo docker run -d -p 8080:8080 -e PORT=8080 -e ConnectionStrings__DefaultConnec
 curl http://localhost:8080/api/customers/
 ```
 
-## Constainer Image in GitHub Container Registry pushen
+## Container Image in GitHub Container Registry pushen
 
 ```bash
 echo YOUR_PAT | sudo docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
