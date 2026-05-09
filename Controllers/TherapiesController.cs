@@ -26,6 +26,18 @@ public class TherapiesController : ControllerBase
         return Ok(therapies);
     }
 
+    [HttpGet("valid")]
+    public async Task<IActionResult> GetValid([FromQuery] DateTime date)
+    {
+        date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
+        var therapies = await _context.Therapies
+            .Where(t => t.ValidFrom <= date && (t.ValidTo == null || t.ValidTo >= date))
+            .OrderBy(t => t.Name)
+            .ThenBy(t => t.ValidFrom)
+            .ToListAsync();
+        return Ok(therapies);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
