@@ -88,6 +88,7 @@ public class BillsController : ControllerBase
             appointments = payload.Appointments,
             bill.CreatedAt,
             customer,
+            Number = bill.Id,
             TotalPrice = totalPrice,
         };
 
