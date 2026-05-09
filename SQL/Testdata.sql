@@ -14,7 +14,9 @@ VALUES ('Entspannungs-Massage kurz', 'Rücken-, Nackenmassage', 'Nacken, Schulte
 INSERT INTO therapies (name, name_on_bill, description, duration, price, valid_from, valid_to, created_at, updated_at)
 VALUES ('Fussreflexzonenmassage', 'Rücken-, Nackenmassage', 'Füsse, Beine', 30, 50, '2026-01-01 00:00:00', NULL, NOW(), NOW());
 INSERT INTO therapies (name, name_on_bill, description, duration, price, valid_from, valid_to, created_at, updated_at)
-VALUES ('Tibetische Massage', 'Rücken-, Nackenmassage', 'Ganzkörpermassage Tibetische-Art', 60, 90, '2026-01-01 00:00:00', NULL, NOW(), NOW());
+VALUES ('Tibetische Massage', 'Rücken-, Nackenmassage', 'Ganzkörpermassage Tibetische-Art', 60, 90, '2026-01-01 00:00:00', '2026-12-31 23:59:59', NOW(), NOW());
+INSERT INTO therapies (name, name_on_bill, description, duration, price, valid_from, valid_to, created_at, updated_at)
+VALUES ('Tibetische Massage', 'Rücken-, Nackenmassage', 'Ganzkörpermassage Tibetische-Art', 60, 100, '2027-01-01 00:00:00', NULL, NOW(), NOW());
 
 -- TRUNCATE TABLE appointments;
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
