@@ -12,7 +12,7 @@ using reliefo_api.Data;
 namespace reliefo_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260507155753_InitialCreate")]
+    [Migration("20260509060956_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -82,10 +82,6 @@ namespace reliefo_api.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<int?>("CustomerBillNumber")
-                        .HasColumnType("integer")
-                        .HasColumnName("customer_bill_number");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer")
                         .HasColumnName("customers_id");
@@ -94,6 +90,10 @@ namespace reliefo_api.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("data");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
 
                     b.Property<string>("Filename")
                         .IsRequired()

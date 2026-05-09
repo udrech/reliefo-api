@@ -67,11 +67,11 @@ namespace reliefo_api.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     customers_id = table.Column<int>(type: "integer", nullable: false),
-                    customer_bill_number = table.Column<int>(type: "integer", nullable: true),
                     filename = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     data = table.Column<string>(type: "text", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    deleted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
