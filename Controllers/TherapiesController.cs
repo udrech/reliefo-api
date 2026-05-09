@@ -19,7 +19,10 @@ public class TherapiesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var therapies = await _context.Therapies.ToListAsync();
+        var therapies = await _context.Therapies
+            .OrderBy(t => t.Name)
+            .ThenBy(t => t.ValidFrom)
+            .ToListAsync();
         return Ok(therapies);
     }
 
