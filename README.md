@@ -75,9 +75,26 @@ dotnet format reliefo-api.csproj --exclude **/Migrations/** --verify-no-changes
 
 ## Container Image erstellen auf WSL
 
+1. Client clonen + Build
+
+```bash
+git clone https://github.com/udrech/reliefo-client.git
+cd reliefo-client
+ng build --configuration production
+```
+
+1. API clonen + Client in wwwroot kopieren
+
 ```bash
 git clone https://github.com/udrech/reliefo-api.git
 cd reliefo-api
+mkdir -p wwwroot
+cp -r ../reliefo-client/dist/reliefo-client/browser/* wwwroot/
+```
+
+1. Container Image erstellen mit Paketo Buildpack
+
+```bash
 sudo pack build reliefo --builder paketobuildpacks/builder-jammy-base
 ```
 
