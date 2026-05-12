@@ -112,6 +112,25 @@ sudo docker run -d -p 8080:8080 -e PORT=8080 -e ConnectionStrings__DefaultConnec
 curl http://localhost:8080/api/customers/
 ```
 
+## Container starten mit Docker Compose
+
+```bash
+sudo docker-compose up -d
+curl http://localhost:8080/api/customers/
+```
+
+## Container stoppen mit Docker Compose
+
+```bash
+sudo docker-compose down
+```
+
+## Open Bash Shell in Container
+
+```bash
+sudo docker exec -it <container_id> bash
+```
+
 ## Container Image in GitHub Container Registry pushen
 
 ```bash

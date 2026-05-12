@@ -60,3 +60,4 @@ wwwroot/
 bills/
 data.json
 request.json
+docker-compose.yml
