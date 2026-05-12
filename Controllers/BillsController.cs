@@ -209,6 +209,11 @@ public class BillsController : ControllerBase
         var renderJson = await renderResponse.Content.ReadFromJsonAsync<JsonElement>();
         var renderId = renderJson.GetProperty("data").GetProperty("renderId").GetString();
 
+        if (renderId is null)
+        {
+            throw new HttpRequestException("Carbone API did not return a valid renderId");
+        }
+
         var downloadResponse = await client.GetAsync($"{renderUrl}{renderId}");
         downloadResponse.EnsureSuccessStatusCode();
 
