@@ -174,7 +174,7 @@ public class BillsController : ControllerBase
 
     private async Task<(string renderId, string filePath)> CreateCarboneReport(object billData)
     {
-        var renderUrl = _configuration["Carbone:RenderUrl"];
+        var renderUrl = "https://api.carbone.io/render/";
         var templateId = _configuration["Carbone:TemplateId"];
         var apiKey = _configuration["Carbone:ApiKey"];
         var billsDirectory = _configuration["Carbone:BillsDirectory"] ?? "bills";
@@ -199,7 +199,12 @@ public class BillsController : ControllerBase
         var json = JsonSerializer.Serialize(requestBody);
         var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
         var renderResponse = await client.PostAsync($"{renderUrl}{templateId}", content);
-        renderResponse.EnsureSuccessStatusCode();
+
+        if (!renderResponse.IsSuccessStatusCode)
+        {
+            var errorContent = await renderResponse.Content.ReadAsStringAsync();
+            throw new HttpRequestException($"Carbone API error ({renderResponse.StatusCode}): {errorContent}");
+        }
 
         var renderJson = await renderResponse.Content.ReadFromJsonAsync<JsonElement>();
         var renderId = renderJson.GetProperty("data").GetProperty("renderId").GetString();
