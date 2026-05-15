@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using reliefo_api.Data;
 using reliefo_api.Models;
@@ -92,7 +93,24 @@ public class AppointmentsController : ControllerBase
             return NotFound();
         }
 
-        // ToDo: prüfen ob Termin in Rechnung verwendet wird
+        if (appointment.BillId is not null)
+        {
+            var bill = await _context.Bills.FindAsync(appointment.BillId);
+            if (bill is not null && !string.IsNullOrEmpty(bill.Data))
+            {
+                using var doc = JsonDocument.Parse(bill.Data);
+                var usedInBill = doc.RootElement
+                    .GetProperty("appointments")
+                    .EnumerateArray()
+                    .Any(a => a.TryGetProperty("Id", out var idProp) && idProp.ValueKind == JsonValueKind.Number && idProp.GetInt32() == id);
+
+                if (usedInBill)
+                {
+                    return Conflict("Löschen nicht möglich: Der Termin ist in einer Quittung enthalten.");
+                }
+            }
+        }
+
         _context.Appointments.Remove(appointment);
         await _context.SaveChangesAsync();
         return NoContent();
