@@ -9,8 +9,6 @@ Reliefo Therapy App API
 ## Nächste Schritte
 
 * API Funktionen fertig implementieren
-* Container Image erstellen mit Paketo Buildpacks
-* Image testen auf Notebook mit Postman
 * CI/CD Pipeline mit GitHub Actions erstellen
 
 ## Begriffsdefinitionen
