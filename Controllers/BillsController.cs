@@ -83,9 +83,23 @@ public class BillsController : ControllerBase
             .Select(a => a.Therapy?.Price ?? 0)
             .Sum();
 
+        const int reportRows = 27;
+        var paddedAppointments = payload.Appointments
+            .Cast<object>()
+            .Concat(Enumerable
+                .Range(0, Math.Max(0, reportRows - payload.Appointments.Count))
+                .Select(_ => (object)new
+                {
+                    Id = (int?)null,
+                    AppointmentTimestamp = (DateTime?)null,
+                    Therapy = (object?)null,
+                    Customer = (object?)null,
+                }))
+            .ToList();
+
         var billData = new
         {
-            appointments = payload.Appointments,
+            appointments = paddedAppointments,
             bill.CreatedAt,
             customer,
             Number = bill.Id,
