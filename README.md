@@ -87,6 +87,7 @@ ng build --configuration production
 git clone https://github.com/udrech/reliefo-api.git
 cd reliefo-api
 mkdir -p wwwroot
+rm -rf ./wwwroot/*
 cp -r ../reliefo-client/dist/reliefo-client/browser/* wwwroot/
 ```
 
@@ -132,7 +133,7 @@ sudo docker exec -it <container_id> bash
 ## Container Image in GitHub Container Registry pushen
 
 ```bash
-echo YOUR_PAT | sudo docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
+echo YOUR_PAT | sudo docker login ghcr.io -u udrech --password-stdin
 sudo docker tag reliefo ghcr.io/udrech/reliefo:latest
 sudo docker push ghcr.io/udrech/reliefo:latest
 ```
