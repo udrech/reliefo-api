@@ -66,6 +66,7 @@ public class BillsController : ControllerBase
         var bill = new Bill
         {
             CustomerId = payload.CustomerId,
+            BillNumber = await GetNextBillNumber(),
             Filename = string.Empty,
             Data = string.Empty,
             CreatedAt = DateTime.UtcNow,
@@ -102,7 +103,7 @@ public class BillsController : ControllerBase
             appointments = paddedAppointments,
             bill.CreatedAt,
             customer,
-            Number = bill.Id,
+            Number = bill.BillNumber,
             TotalPrice = totalPrice,
         };
 
@@ -237,5 +238,36 @@ public class BillsController : ControllerBase
         await System.IO.File.WriteAllBytesAsync(filePath, pdfBytes);
 
         return (renderId, filePath);
+    }
+
+    private async Task<int> GetNextBillNumber()
+    {
+        var currentYear = DateTime.UtcNow.Year;
+        var yearStart = new DateTime(currentYear, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var yearEnd = new DateTime(currentYear, 12, 31, 23, 59, 59, DateTimeKind.Utc);
+
+        // Get the highest bill number for the current year
+        var maxBillNumberForYear = await _context.Bills
+            .Where(b => b.CreatedAt >= yearStart && b.CreatedAt <= yearEnd)
+            .MaxAsync(b => (int?)b.BillNumber);
+
+        // If there are bills in the current year, return max + 1
+        if (maxBillNumberForYear.HasValue)
+        {
+            return maxBillNumberForYear.Value + 1;
+        }
+
+        // Check if table is completely empty
+        var hasAnyBills = await _context.Bills.AnyAsync();
+
+        // Table is empty - read billStartNumber from environment, default to 1
+        if (!hasAnyBills)
+        {
+            var billStartNumber = _configuration["billStartNumber"];
+            return int.TryParse(billStartNumber, out var startNumber) ? startNumber : 1;
+        }
+
+        // Table has bills from other years, but none for current year - start from 1
+        return 1;
     }
 }

@@ -16,6 +16,9 @@ public class Bill
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
 
+    [Column("bill_number")]
+    public int BillNumber { get; set; } = 0;
+
     [Column("filename")]
     [StringLength(255)]
     public string Filename { get; set; } = string.Empty;

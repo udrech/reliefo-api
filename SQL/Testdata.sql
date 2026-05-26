@@ -69,9 +69,9 @@ INSERT INTO medical_history_records (customers_id, history_timestamp, type, note
 VALUES (3, '2026-04-12 14:00:00', 'Anamnese', 'Knieschmerzen seit 3 Jahren', NOW(), NOW());
 
 -- TRUNCATE TABLE bills;
-INSERT INTO bills (customers_id, filename, data, created_at, updated_at, deleted_at)
-VALUES (1, 'quittung.pdf', '{}', NOW(), NOW(), NULL);
-INSERT INTO bills (customers_id, filename, data, created_at, updated_at, deleted_at)
-VALUES (2, 'quittung.pdf', '{}', NOW(), NOW(), NULL);
-INSERT INTO bills (customers_id, filename, data, created_at, updated_at, deleted_at)
-VALUES (3, 'quittung.pdf', '{}', NOW(), NOW(), NULL);
+INSERT INTO bills (customers_id, bill_number, filename, data, created_at, updated_at, deleted_at)
+VALUES (1, 1, 'quittung.pdf', '{}', NOW(), NOW(), NULL);
+INSERT INTO bills (customers_id, bill_number, filename, data, created_at, updated_at, deleted_at)
+VALUES (2, 2, 'quittung.pdf', '{}', NOW(), NOW(), NULL);
+INSERT INTO bills (customers_id, bill_number, filename, data, created_at, updated_at, deleted_at)
+VALUES (3, 3, 'quittung.pdf', '{}', NOW(), NOW(), NULL);

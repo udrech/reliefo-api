@@ -12,7 +12,7 @@ using reliefo_api.Data;
 namespace reliefo_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260509060956_InitialCreate")]
+    [Migration("20260526185355_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -77,6 +77,10 @@ namespace reliefo_api.Migrations
                         .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BillNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("bill_number");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")

@@ -75,6 +75,10 @@ namespace reliefo_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BillNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("bill_number");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
