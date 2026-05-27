@@ -2,14 +2,10 @@
 
 Reliefo Therapy App API
 
-## ToDo
+## Ideen, Wünsche,ToDo
 
-* Löschen mit vorgängiger Prüfung auf bestehende Verweise
-
-## Nächste Schritte
-
-* API Funktionen fertig implementieren
-* CI/CD Pipeline mit GitHub Actions erstellen
+* Doku: Wartung, Angular Update, etc.
+* CI/CD Pipeline für Container Image Erstellung mit GitHub Actions erstellen
 
 ## Begriffsdefinitionen
 
@@ -135,7 +131,15 @@ sudo docker exec -it <container_id> bash
 ```bash
 echo YOUR_PAT | sudo docker login ghcr.io -u udrech --password-stdin
 sudo docker tag reliefo ghcr.io/udrech/reliefo:latest
+sudo docker tag reliefo ghcr.io/udrech/reliefo:x
 sudo docker push ghcr.io/udrech/reliefo:latest
+sudo docker push ghcr.io/udrech/reliefo:x
+```
+
+## Container Images von GitHub Container Registry auflisten
+
+```bash
+curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: Bearer YOUR_PAT" https://api.github.com/orgs/udrech/packages/container/reliefo/versions
 ```
 
 ## Datenstruktur für carbone.io Studio
