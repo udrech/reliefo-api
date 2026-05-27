@@ -130,10 +130,10 @@ sudo docker exec -it <container_id> bash
 
 ```bash
 echo YOUR_PAT | sudo docker login ghcr.io -u udrech --password-stdin
-sudo docker tag reliefo ghcr.io/udrech/reliefo:latest
-sudo docker tag reliefo ghcr.io/udrech/reliefo:x
-sudo docker push ghcr.io/udrech/reliefo:latest
-sudo docker push ghcr.io/udrech/reliefo:x
+sudo docker tag reliefo ghcr.io/udrech/reliefo/reliefo:latest
+sudo docker tag reliefo ghcr.io/udrech/reliefo/reliefo:1
+sudo docker push ghcr.io/udrech/reliefo/reliefo:latest
+sudo docker push ghcr.io/udrech/reliefo/reliefo:1
 ```
 
 ## Container Images von GitHub Container Registry auflisten
