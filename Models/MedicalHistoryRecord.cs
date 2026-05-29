@@ -19,9 +19,9 @@ public class MedicalHistoryRecord
     [Column("history_timestamp")]
     public DateTime HistoryTimestamp { get; set; } = DateTime.UtcNow;
 
-    [Column("type")]
+    [Column("history_type")]
     [StringLength(100)]
-    public string? Type { get; set; } = null;
+    public string? HistoryType { get; set; } = null;
 
     [Column("note")]
     public string Note { get; set; } = string.Empty;

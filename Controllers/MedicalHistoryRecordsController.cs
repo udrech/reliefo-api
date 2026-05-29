@@ -21,6 +21,18 @@ public class MedicalHistoryRecordsController : ControllerBase
     {
         var records = await _context.MedicalHistoryRecords
             .Include(m => m.Customer)
+            .OrderByDescending(m => m.HistoryTimestamp)
+            .ToListAsync();
+        return Ok(records);
+    }
+
+    [HttpGet("customer/{customerId}")]
+    public async Task<IActionResult> GetByCustomerId(int customerId)
+    {
+        var records = await _context.MedicalHistoryRecords
+            .Where(m => m.CustomerId == customerId)
+            .Include(m => m.Customer)
+            .OrderByDescending(m => m.HistoryTimestamp)
             .ToListAsync();
         return Ok(records);
     }
@@ -60,7 +72,7 @@ public class MedicalHistoryRecordsController : ControllerBase
 
         record.CustomerId = updated.CustomerId;
         record.HistoryTimestamp = updated.HistoryTimestamp;
-        record.Type = updated.Type;
+        record.HistoryType = updated.HistoryType;
         record.Note = updated.Note;
         record.UpdatedAt = DateTime.UtcNow;
 
