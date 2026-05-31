@@ -4,9 +4,7 @@ Reliefo Therapy App API
 
 ## Ideen, Wünsche,ToDo
 
-* Backup einrichten
-* Volume richtig konfigurieren
-* Doku: Wartung, Angular Update, etc.
+* Doku: Wartung, .NET Update, etc.
 * CI/CD Pipeline für Container Image Erstellung mit GitHub Actions erstellen
 
 ## Begriffsdefinitionen
