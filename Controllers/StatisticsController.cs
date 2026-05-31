@@ -15,6 +15,31 @@ public class StatisticsController : ControllerBase
         _context = context;
     }
 
+    [HttpGet("appointments-per-month")]
+    public async Task<IActionResult> GetAppointmentsPerMonth([FromQuery] int year)
+    {
+        var appointmentsByMonth = await _context.Appointments
+            .Where(a => a.AppointmentTimestamp.Year == year)
+            .GroupBy(a => a.AppointmentTimestamp.Month)
+            .Select(g => new
+            {
+                Month = g.Key,
+                AppointmentCount = g.Count(),
+            })
+            .ToListAsync();
+
+        var result = Enumerable.Range(1, 12)
+            .Select(month => new
+            {
+                Month = month,
+                AppointmentCount = appointmentsByMonth
+                    .FirstOrDefault(a => a.Month == month)?.AppointmentCount ?? 0,
+            })
+            .ToList();
+
+        return Ok(result);
+    }
+
     [HttpGet("appointments-per-customer")]
     public async Task<IActionResult> GetAppointmentsPerCustomer([FromQuery] int year)
     {
