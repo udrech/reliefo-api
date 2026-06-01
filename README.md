@@ -4,6 +4,11 @@ Reliefo Therapy App API
 
 ## Ideen, Wünsche,ToDo
 
+* Checks:
+  * Termin nicht ändern, wenn für diesen bereits eine Quittung erstellt wurde.
+  * Evtl. Therapie nur teilweise änderbar, wenn für diese bereits eine Quittung erstellt wurde.
+  * Evtl. Kunde nur teilweise änderbar, wenn für diesen bereits eine Quittung erstellt wurde.
+  * Prüfen ob Quittungsdatei vorhanden ist und andernfalls Quittung markieren.
 * Doku: Wartung, .NET Update, etc.
 * CI/CD Pipeline für Container Image Erstellung mit GitHub Actions erstellen
 
