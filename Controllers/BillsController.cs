@@ -138,7 +138,7 @@ public class BillsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = bill.Id }, bill);
     }
 
-    [HttpGet("{id}/file")]
+    [HttpGet("{id}/download")]
     public async Task<IActionResult> GetFile(int id)
     {
         var bill = await _context.Bills.FindAsync(id);
