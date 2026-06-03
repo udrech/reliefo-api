@@ -84,7 +84,7 @@ public class BillsController : ControllerBase
             .Select(a => a.Therapy?.Price ?? 0)
             .Sum();
 
-        const int reportRows = 27;
+        const int reportRows = 25;
         var paddedAppointments = payload.Appointments
             .Cast<object>()
             .Concat(Enumerable
