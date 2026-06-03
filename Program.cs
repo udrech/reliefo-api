@@ -23,8 +23,8 @@ if (app.Environment.IsDevelopment())
 app.MapGet("/api/", () => Results.Text("Reliefo API"));
 
 // version endpoint
-var version = "1";
-var releaseDate = "27.05.2026";
+var version = "2";
+var releaseDate = "03.06.2026";
 app.MapGet("/api/version", () => Results.Json(new { version, releaseDate }));
 
 app.UseDefaultFiles(); // rewrites / to /index.html
