@@ -95,6 +95,8 @@ cp -r ../reliefo-client/dist/reliefo-client/browser/* wwwroot/
 1. Container Image erstellen mit Paketo Buildpack
 
 ```bash
+sudo docker image rm reliefo:latest
+sudo docker image prune
 sudo pack build reliefo --builder paketobuildpacks/builder-jammy-base
 ```
 
@@ -135,17 +137,15 @@ sudo docker exec -it <container_id> bash
 
 ```bash
 echo YOUR_PAT | sudo docker login ghcr.io -u udrech --password-stdin
-sudo docker tag reliefo ghcr.io/udrech/reliefo/reliefo:latest
-sudo docker tag reliefo ghcr.io/udrech/reliefo/reliefo:1
+sudo docker tag reliefo:latest ghcr.io/udrech/reliefo/reliefo:latest
+sudo docker tag reliefo:latest ghcr.io/udrech/reliefo/reliefo:2
 sudo docker push ghcr.io/udrech/reliefo/reliefo:latest
-sudo docker push ghcr.io/udrech/reliefo/reliefo:1
+sudo docker push ghcr.io/udrech/reliefo/reliefo:2
 ```
 
 ## Container Images von GitHub Container Registry auflisten
 
-```bash
-curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: Bearer YOUR_PAT" https://api.github.com/orgs/udrech/packages/container/reliefo/versions
-```
+<https://github.com/users/udrech/packages/container/package/reliefo%2Freliefo>
 
 ## Datenstruktur für carbone.io Studio
 
