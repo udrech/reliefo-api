@@ -40,8 +40,8 @@ jobs:
       - name: Build image with pack (Docker)
         working-directory: reliefo-api
         run: |
-          docker image rm reliefo:latest || true
-          docker image prune -f
+          # docker image rm reliefo:latest || true
+          # docker image prune -f
           pack build reliefo:latest --builder paketobuildpacks/builder-jammy-base
 
   publish:
