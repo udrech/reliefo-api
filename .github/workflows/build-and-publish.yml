@@ -1,0 +1,67 @@
+name: Build and Publish Container Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag for the container image (e.g. 3)'
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout reliefo-api
+        uses: actions/checkout@v4
+        with:
+          path: reliefo-api
+
+      - name: Checkout reliefo-client
+        uses: actions/checkout@v4
+        with:
+          repository: udrech/reliefo-client
+          path: reliefo-client
+
+      - name: Build reliefo-client (Angular)
+        working-directory: reliefo-client
+        run: |
+          npm ci
+          npx ng build --configuration production
+
+      - name: Copy client build into wwwroot
+        working-directory: reliefo-api
+        run: |
+          mkdir -p wwwroot
+          rm -rf wwwroot/*
+          cp -r ../reliefo-client/dist/reliefo-client/browser/* wwwroot/
+
+      - name: Build image with pack (Docker)
+        working-directory: reliefo-api
+        run: |
+          docker image rm reliefo:latest || true
+          docker image prune -f
+          pack build reliefo:latest --builder paketobuildpacks/builder-jammy-base
+
+  publish:
+    runs-on: self-hosted
+    needs: build
+
+    steps:
+      - name: Login to GitHub Container Registry
+        run: cat "$HOME/.secrets/ghcr-pat.token" | docker login ghcr.io -u udrech --password-stdin
+
+      - name: Tag image
+        run: |
+          docker tag reliefo:latest ghcr.io/udrech/reliefo/reliefo:latest
+          if [ ! -z "${{ inputs.version }}" ]; then
+            docker tag reliefo:latest ghcr.io/udrech/reliefo/reliefo:${{ inputs.version }}
+          fi
+
+      - name: Push image
+        run: |
+          docker push ghcr.io/udrech/reliefo/reliefo:latest
+          if [ ! -z "${{ inputs.version }}" ]; then
+            docker push ghcr.io/udrech/reliefo/reliefo:${{ inputs.version }}
+          fi

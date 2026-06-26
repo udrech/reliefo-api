@@ -143,6 +143,47 @@ sudo docker push ghcr.io/udrech/reliefo/reliefo:latest
 sudo docker push ghcr.io/udrech/reliefo/reliefo:2
 ```
 
+## Self-hosted GitHub Actions Runner installieren
+
+Die Pipeline `.github/workflows/build-and-publish.yml` läuft auf einem selbst gehosteten Runner (z.B. WSL), da dort Docker und `pack` bereits verfügbar sind.
+
+1. Auf GitHub: **Settings → Actions → Runners → New self-hosted runner** öffnen und der Anleitung folgen (Download + Konfiguration mit dem angezeigten Token), z.B.:
+
+```bash
+mkdir actions-runner && cd actions-runner
+curl -o actions-runner-linux-x64.tar.gz -L https://github.com/actions/runner/releases/latest/download/actions-runner-linux-x64.tar.gz
+tar xzf ./actions-runner-linux-x64.tar.gz
+./config.sh --url https://github.com/udrech/reliefo-api --token <TOKEN_AUS_GITHUB>
+```
+
+1. Voraussetzungen auf dem Runner installieren: `git`, `node`/`npm` + `@angular/cli` (für `ng build`), `docker`, [`pack` CLI](https://buildpacks.io/docs/tools/pack/) (Paketo Buildpacks).
+
+1. GitHub Personal Access Token (PAT) mit `write:packages` Berechtigung lokal auf dem Runner ablegen (wird beim Push nach ghcr.io verwendet, nicht als GitHub Secret):
+
+```bash
+mkdir -p ~/.secrets
+echo "<PAT>" > ~/.secrets/ghcr-pat.token
+chmod 600 ~/.secrets/ghcr-pat.token
+```
+
+1. Runner als Dienst starten, damit er dauerhaft läuft:
+
+```bash
+sudo ./svc.sh install
+sudo ./svc.sh start
+```
+
+## Container Image Pipeline manuell auslösen
+
+Die Pipeline wird nur manuell gestartet (kein automatischer Trigger):
+
+* Auf GitHub: **Actions → Build and Publish Container Image → Run workflow**, dabei die `version` angeben (z.B. `2`).
+* Oder mit der GitHub CLI:
+
+```bash
+gh workflow run build-and-publish.yml -f version=2
+```
+
 ## Container Images von GitHub Container Registry auflisten
 
 <https://github.com/users/udrech/packages/container/package/reliefo%2Freliefo>
