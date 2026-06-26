@@ -58,4 +58,29 @@ public class StatisticsController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpGet("income-per-month")]
+    public async Task<IActionResult> GetIncomePerMonth([FromQuery] int year)
+    {
+        var incomeByMonth = await _context.Appointments
+            .Where(a => a.AppointmentTimestamp.Year == year)
+            .GroupBy(a => a.AppointmentTimestamp.Month)
+            .Select(g => new
+            {
+                Month = g.Key,
+                Income = g.Sum(a => a.Therapy!.Price),
+            })
+            .ToListAsync();
+
+        var result = Enumerable.Range(1, 12)
+            .Select(month => new
+            {
+                Month = month,
+                Income = incomeByMonth
+                    .FirstOrDefault(i => i.Month == month)?.Income ?? 0,
+            })
+            .ToList();
+
+        return Ok(result);
+    }
 }
