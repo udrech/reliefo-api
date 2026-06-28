@@ -74,6 +74,8 @@ public class MedicalHistoryRecordsController : ControllerBase
         record.HistoryTimestamp = updated.HistoryTimestamp;
         record.HistoryType = updated.HistoryType;
         record.Note = updated.Note;
+        record.Markings = updated.Markings;
+        record.MarkingsImage = updated.MarkingsImage;
         record.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

@@ -61,12 +61,12 @@ INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_times
 VALUES (2, 3, NULL, '2026-05-20 14:00:00', NOW(), NOW());
 
 -- TRUNCATE TABLE medical_history_records;
-INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, created_at, updated_at)
-VALUES (1, '2026-04-10 10:00:00', 'Medikamente', 'Blutdrucksenkung', NOW(), NOW());
-INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, created_at, updated_at)
-VALUES (2, '2026-04-11 14:00:00', 'Anamnese', 'Verspannungen im Schulterbereich, vor allem links', NOW(), NOW());
-INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, created_at, updated_at)
-VALUES (3, '2026-04-12 14:00:00', 'Anamnese', 'Knieschmerzen seit 3 Jahren', NOW(), NOW());
+INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, markings, markings_image, created_at, updated_at)
+VALUES (1, '2026-04-10 10:00:00', 'Medikamente', 'Blutdrucksenkung', NULL, 'body_diagram_gemini1.png', NOW(), NOW());
+INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, markings, markings_image, created_at, updated_at)
+VALUES (2, '2026-04-11 14:00:00', 'Anamnese', 'Verspannungen im Schulterbereich, vor allem links', '[{"points":[{"x":0.6875,"y":0.23476874003189793}],"lineWidth":10},{"points":[{"x":0.7317708333333334,"y":0.23476874003189793}],"lineWidth":10}]', 'body_diagram_gemini1.png', NOW(), NOW());
+INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, markings, markings_image, created_at, updated_at)
+VALUES (3, '2026-04-12 14:00:00', 'Anamnese', 'Knieschmerzen seit 3 Jahren', '[{"points":[{"x":0.22916666666666666,"y":0.7094098883572568}],"lineWidth":15}]', 'body_diagram_gemini1.png', NOW(), NOW());
 
 -- TRUNCATE TABLE bills;
 INSERT INTO bills (customers_id, bill_number, filename, data, created_at, updated_at, deleted_at)

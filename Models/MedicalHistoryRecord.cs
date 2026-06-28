@@ -26,6 +26,12 @@ public class MedicalHistoryRecord
     [Column("note")]
     public string Note { get; set; } = string.Empty;
 
+    [Column("markings")]
+    public string? Markings { get; set; } = null;
+
+    [Column("markings_image")]
+    public string? MarkingsImage { get; set; } = null;
+
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
