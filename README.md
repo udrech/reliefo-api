@@ -47,6 +47,13 @@ dotnet ef migrations add <MigrationName>
 dotnet ef database update
 ```
 
+## DB manuell migrieren (API build + dotnet ef database update)
+
+```bash
+dotnet build
+dotnet ef database update
+```
+
 ## DB zurücksetzen
 
 ```bash
@@ -96,8 +103,14 @@ cp -r ../reliefo-client/dist/reliefo-client/browser/* wwwroot/
 
 ```bash
 sudo docker image rm reliefo:latest
+sudo docker image rm ghcr.io/udrech/reliefo/reliefo:latest
 sudo docker image prune
 sudo pack build reliefo --builder paketobuildpacks/builder-jammy-base
+
+1. Container Image erstellen mit Paketo Buildpack (Testversion)
+
+```bash
+sudo pack build reliefo:3-test --builder paketobuildpacks/builder-jammy-base
 ```
 
 ## Container Image testen mit Docker (ohne DB-Verbindung)
@@ -141,6 +154,14 @@ sudo docker tag reliefo:latest ghcr.io/udrech/reliefo/reliefo:latest
 sudo docker tag reliefo:latest ghcr.io/udrech/reliefo/reliefo:2
 sudo docker push ghcr.io/udrech/reliefo/reliefo:latest
 sudo docker push ghcr.io/udrech/reliefo/reliefo:2
+```
+
+## Container Image von GitHub Container Registry pushen (Testversion)
+
+```bash
+echo YOUR_PAT | sudo docker login ghcr.io -u udrech --password-stdin
+sudo docker tag reliefo:3-test ghcr.io/udrech/reliefo/reliefo:3-test
+sudo docker push ghcr.io/udrech/reliefo/reliefo:3-test
 ```
 
 ## Container Images von GitHub Container Registry auflisten
