@@ -105,7 +105,7 @@ cp -r ../reliefo-client/dist/reliefo-client/browser/* wwwroot/
 sudo docker image rm reliefo:latest
 sudo docker image rm ghcr.io/udrech/reliefo/reliefo:latest
 sudo docker image prune
-sudo pack build reliefo --builder paketobuildpacks/builder-jammy-base
+sudo pack build reliefo:latest --builder paketobuildpacks/builder-jammy-base
 
 1. Container Image erstellen mit Paketo Buildpack (Testversion)
 
