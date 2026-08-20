@@ -195,3 +195,30 @@ curl "https://api.carbone.io/render/MTAuMjAuMjEuNTIgICAgKGMtlbG4HoVY5y9KPZO49Acm
      --header "Authorization: Bearer ..." \
      --output bills/MTAuMjAuMjEuNTIgICAgKGMtlbG4HoVY5y9KPZO49AcmVwb3J0.pdf
 ```
+
+## Update .NET SDK
+
+1. Download von <https://dotnet.microsoft.com/en-us/download>
+1. Installation
+
+## Update Package
+
+```bash
+dotnet tool install -g dotnet-outdated-tool
+```
+
+1. ```bash
+   dotnet outdated
+   ```
+
+1. Version ändern in reliefo-api.csproj
+
+1. ```bash
+   dotnet restore
+   ```
+
+oder
+
+1. ```bash
+   dotnet outdated --upgrade
+   ```
