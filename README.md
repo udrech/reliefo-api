@@ -197,8 +197,14 @@ curl "https://api.carbone.io/render/MTAuMjAuMjEuNTIgICAgKGMtlbG4HoVY5y9KPZO49Acm
 
 ## Update .NET SDK
 
+### Windows
+
 1. Download von <https://dotnet.microsoft.com/en-us/download>
 1. Installation
+
+### WSL (Ubuntu)
+
+Auf WSL ist kein .NET SDK installiert, da der Container mit dem Buildpack erstellt wird.
 
 ## Update Package
 
