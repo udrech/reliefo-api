@@ -20,52 +20,52 @@ VALUES ('Tibetische Massage', 'Rücken-, Nackenmassage', 'Ganzkörpermassage Tib
 
 -- TRUNCATE TABLE appointments;
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 1, NULL, '2026-05-01 10:00:00', NOW(), NOW());
+VALUES (1, 1, NULL, '2026-08-15 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 1, NULL, '2026-05-02 14:00:00', NOW(), NOW());
+VALUES (2, 1, NULL, '2026-08-16 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 2, NULL, '2026-05-03 14:00:00', NOW(), NOW());
+VALUES (3, 2, NULL, '2026-08-17 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 3, NULL, '2026-05-04 10:00:00', NOW(), NOW());
+VALUES (1, 3, NULL, '2026-08-18 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 4, NULL, '2026-05-05 14:00:00', NOW(), NOW());
+VALUES (2, 4, NULL, '2026-08-19 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 1, NULL, '2026-05-06 14:00:00', NOW(), NOW());
+VALUES (3, 1, NULL, '2026-08-20 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 2, NULL, '2026-05-07 10:00:00', NOW(), NOW());
+VALUES (1, 2, NULL, '2026-08-21 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 3, NULL, '2026-05-08 14:00:00', NOW(), NOW());
+VALUES (2, 3, NULL, '2026-08-22 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 4, NULL, '2026-05-09 14:00:00', NOW(), NOW());
+VALUES (3, 4, NULL, '2026-08-23 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 4, NULL, '2026-05-10 10:00:00', NOW(), NOW());
+VALUES (1, 4, NULL, '2026-08-24 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 2, NULL, '2026-05-11 14:00:00', NOW(), NOW());
+VALUES (2, 2, NULL, '2026-08-25 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 3, NULL, '2026-05-12 14:00:00', NOW(), NOW());
+VALUES (3, 3, NULL, '2026-08-26 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 1, NULL, '2026-05-13 10:00:00', NOW(), NOW());
+VALUES (1, 1, NULL, '2026-08-27 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 4, NULL, '2026-05-14 14:00:00', NOW(), NOW());
+VALUES (2, 4, NULL, '2026-08-28 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 2, NULL, '2026-05-15 14:00:00', NOW(), NOW());
+VALUES (3, 2, NULL, '2026-08-29 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 3, NULL, '2026-05-16 10:00:00', NOW(), NOW());
+VALUES (1, 3, NULL, '2026-08-30 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 1, NULL, '2026-05-17 14:00:00', NOW(), NOW());
+VALUES (2, 1, NULL, '2026-08-31 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 4, NULL, '2026-05-18 14:00:00', NOW(), NOW());
+VALUES (3, 4, NULL, '2026-09-01 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 2, NULL, '2026-05-19 10:00:00', NOW(), NOW());
+VALUES (1, 2, NULL, '2026-09-02 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 3, NULL, '2026-05-20 14:00:00', NOW(), NOW());
+VALUES (2, 3, NULL, '2026-09-03 14:00:00', NOW(), NOW());
 
 -- TRUNCATE TABLE medical_history_records;
-INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, markings, markings_image, created_at, updated_at)
+INSERT INTO medical_history_records (customers_id, history_timestamp, history_type, note, markings, markings_image, created_at, updated_at)
 VALUES (1, '2026-04-10 10:00:00', 'Medikamente', 'Blutdrucksenkung', NULL, 'body_diagram_gemini1.png', NOW(), NOW());
-INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, markings, markings_image, created_at, updated_at)
+INSERT INTO medical_history_records (customers_id, history_timestamp, history_type, note, markings, markings_image, created_at, updated_at)
 VALUES (2, '2026-04-11 14:00:00', 'Anamnese', 'Verspannungen im Schulterbereich, vor allem links', '[{"points":[{"x":0.6875,"y":0.23476874003189793}],"lineWidth":10},{"points":[{"x":0.7317708333333334,"y":0.23476874003189793}],"lineWidth":10}]', 'body_diagram_gemini1.png', NOW(), NOW());
-INSERT INTO medical_history_records (customers_id, history_timestamp, type, note, markings, markings_image, created_at, updated_at)
+INSERT INTO medical_history_records (customers_id, history_timestamp, history_type, note, markings, markings_image, created_at, updated_at)
 VALUES (3, '2026-04-12 14:00:00', 'Anamnese', 'Knieschmerzen seit 3 Jahren', '[{"points":[{"x":0.22916666666666666,"y":0.7094098883572568}],"lineWidth":15}]', 'body_diagram_gemini1.png', NOW(), NOW());
 
 -- TRUNCATE TABLE bills;
