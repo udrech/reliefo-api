@@ -10,7 +10,7 @@ if [ -z "$VERSION" ]; then
   exit 1
 fi
 
-echo "Publishing reliefo-api container image (version: $VERSION)..."
+echo "Publishing reliefo container image (version: $VERSION)..."
 
 # Read GitHub Container Registry token
 TOKEN_FILE="$HOME/.secrets/ghcr-pat.token"

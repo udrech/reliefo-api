@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 PARENT_DIR="$(dirname "$PROJECT_DIR")"
 
-echo "Building reliefo-api..."
+echo "Building reliefo..."
 echo "Project directory: $PROJECT_DIR"
 
 # Ensure we're on main branch and pull latest changes
