@@ -105,11 +105,15 @@ sudo docker image rm reliefo:latest
 sudo docker image rm ghcr.io/udrech/reliefo/reliefo:latest
 sudo docker image prune
 sudo pack build reliefo:latest --builder paketobuildpacks/builder-jammy-base
+```
 
 1. Container Image erstellen mit Paketo Buildpack (Testversion)
 
 ```bash
-sudo pack build reliefo:3-test --builder paketobuildpacks/builder-jammy-base
+sudo docker image rm reliefo:4-test
+sudo docker image rm ghcr.io/udrech/reliefo/reliefo:4-test
+sudo docker image prune
+sudo pack build reliefo:4-test --builder paketobuildpacks/builder-jammy-base
 ```
 
 ## Container Image testen mit Docker (ohne DB-Verbindung)
@@ -159,8 +163,8 @@ sudo docker push ghcr.io/udrech/reliefo/reliefo:2
 
 ```bash
 echo YOUR_PAT | sudo docker login ghcr.io -u udrech --password-stdin
-sudo docker tag reliefo:3-test ghcr.io/udrech/reliefo/reliefo:3-test
-sudo docker push ghcr.io/udrech/reliefo/reliefo:3-test
+sudo docker tag reliefo:4-test ghcr.io/udrech/reliefo/reliefo:4-test
+sudo docker push ghcr.io/udrech/reliefo/reliefo:4-test
 ```
 
 ## Container Images von GitHub Container Registry auflisten
