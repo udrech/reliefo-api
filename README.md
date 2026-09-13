@@ -206,7 +206,7 @@ curl "https://api.carbone.io/render/MTAuMjAuMjEuNTIgICAgKGMtlbG4HoVY5y9KPZO49Acm
 
 Auf WSL ist kein .NET SDK installiert, da der Container mit dem Buildpack erstellt wird.
 
-## Update Package
+## Update Packages
 
 ```bash
 dotnet tool install -g dotnet-outdated-tool
