@@ -20,45 +20,47 @@ VALUES ('Tibetische Massage', 'Rücken-, Nackenmassage', 'Ganzkörpermassage Tib
 
 -- TRUNCATE TABLE appointments;
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 1, NULL, '2026-08-15 10:00:00', NOW(), NOW());
+VALUES (1, 1, NULL, '2026-09-10 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 1, NULL, '2026-08-16 14:00:00', NOW(), NOW());
+VALUES (2, 1, NULL, '2026-09-11 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 2, NULL, '2026-08-17 14:00:00', NOW(), NOW());
+VALUES (3, 2, NULL, '2026-09-12 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 3, NULL, '2026-08-18 10:00:00', NOW(), NOW());
+VALUES (1, 3, NULL, '2026-09-13 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 4, NULL, '2026-08-19 14:00:00', NOW(), NOW());
+VALUES (2, 4, NULL, '2026-09-14 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 1, NULL, '2026-08-20 14:00:00', NOW(), NOW());
+VALUES (3, 1, NULL, '2026-09-15 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 2, NULL, '2026-08-21 10:00:00', NOW(), NOW());
+VALUES (1, 2, NULL, '2026-09-16 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 3, NULL, '2026-08-22 14:00:00', NOW(), NOW());
+VALUES (2, 3, NULL, '2026-09-17 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 4, NULL, '2026-08-23 14:00:00', NOW(), NOW());
+VALUES (3, 4, NULL, '2026-09-18 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 4, NULL, '2026-08-24 10:00:00', NOW(), NOW());
+VALUES (1, 1, NULL, '2026-09-19 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 2, NULL, '2026-08-25 14:00:00', NOW(), NOW());
+VALUES (1, 4, NULL, '2026-09-20 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 3, NULL, '2026-08-26 14:00:00', NOW(), NOW());
+VALUES (2, 2, NULL, '2026-09-21 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 1, NULL, '2026-08-27 10:00:00', NOW(), NOW());
+VALUES (3, 3, NULL, '2026-09-22 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 4, NULL, '2026-08-28 14:00:00', NOW(), NOW());
+VALUES (1, 1, NULL, '2026-09-23 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 2, NULL, '2026-08-29 14:00:00', NOW(), NOW());
+VALUES (2, 4, NULL, '2026-09-24 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 3, NULL, '2026-08-30 10:00:00', NOW(), NOW());
+VALUES (3, 2, NULL, '2026-09-25 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 1, NULL, '2026-08-31 14:00:00', NOW(), NOW());
+VALUES (1, 3, NULL, '2026-09-26 10:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (3, 4, NULL, '2026-09-01 14:00:00', NOW(), NOW());
+VALUES (2, 1, NULL, '2026-09-27 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (1, 2, NULL, '2026-09-02 10:00:00', NOW(), NOW());
+VALUES (3, 4, NULL, '2026-09-28 14:00:00', NOW(), NOW());
 INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
-VALUES (2, 3, NULL, '2026-09-03 14:00:00', NOW(), NOW());
+VALUES (1, 2, NULL, '2026-09-29 10:00:00', NOW(), NOW());
+INSERT INTO appointments (customers_id, therapies_id, bill_id, appointment_timestamp, created_at, updated_at)
+VALUES (2, 3, NULL, '2026-09-30 14:00:00', NOW(), NOW());
 
 -- TRUNCATE TABLE medical_history_records;
 INSERT INTO medical_history_records (customers_id, history_timestamp, history_type, note, markings, markings_image, created_at, updated_at)
